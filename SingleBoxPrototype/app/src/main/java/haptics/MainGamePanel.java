@@ -35,7 +35,7 @@ public class MainGamePanel extends SurfaceView implements
 		getHolder().addCallback(this);
 
 		// create box and load bitmap
-		box = new Box(100, 350);
+		box = new Box(300, 150);
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
