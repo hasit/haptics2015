@@ -35,7 +35,7 @@ public class MainGamePanel extends SurfaceView implements
 		getHolder().addCallback(this);
 
 		// create box and load bitmap
-		box = new Box(300, 150);
+		box = new Box(300, 50);
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -91,7 +91,8 @@ public class MainGamePanel extends SurfaceView implements
 			// the gestures
 			if (box.isTouched()) {
 				// the box was picked up and is being dragged
-				box.setX((int)event.getX());
+				if(event.getX() < getWidth() - 100 && event.getX() > 50)
+					box.setX((int)event.getX());
 				//box.setY((int)event.getY());
 			}
 		} if (event.getAction() == MotionEvent.ACTION_UP) {

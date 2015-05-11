@@ -4,6 +4,7 @@ android {
     buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId 'haptics.singleboxprototype'
+        minSdkVersion 19
     }
     buildTypes {
         release {
