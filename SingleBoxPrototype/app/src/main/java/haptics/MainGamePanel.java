@@ -5,6 +5,9 @@ package haptics;
 
 import haptics.model.Box;
 import haptics.obviam.haptics.R;
+import nxr.tpad.lib.TPad;
+import nxr.tpad.lib.TPadImpl;
+import nxr.tpad.lib.consts.TPadVibration;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,19 +32,24 @@ public class MainGamePanel extends SurfaceView implements
 	private MainThread thread;
 	private Box box;
 
+    //Tpad
+    TPad mTpad;
+
 	public MainGamePanel(Context context) {
 		super(context);
 		// adding the callback (this) to the surface holder to intercept events
 		getHolder().addCallback(this);
 
 		// create box and load bitmap
-		box = new Box(300, 50);
+		box = new Box(300, 400);
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
 		
 		// make the GamePanel focusable so it can handle events
 		setFocusable(true);
+
+        mTpad = new TPadImpl(getContext());
 	}
 
 	@Override
@@ -91,12 +99,16 @@ public class MainGamePanel extends SurfaceView implements
 			// the gestures
 			if (box.isTouched()) {
 				// the box was picked up and is being dragged
-				if(event.getX() < getWidth() - 100 && event.getX() > 50)
+                mTpad.sendVibration(TPadVibration.SINUSOID, 350, 1.0f);
+				if(event.getX() > 150 && event.getX() < getWidth() - 100)
 					box.setX((int)event.getX());
 				//box.setY((int)event.getY());
-			}
+			} else {
+                mTpad.turnOff();
+            }
 		} if (event.getAction() == MotionEvent.ACTION_UP) {
 			// touch was released
+            mTpad.turnOff();
 			if (box.isTouched()) {
 				box.setTouched(false);
 			}

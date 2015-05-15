@@ -1,13 +1,13 @@
 package haptics.model;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 
 /**
- * @author impaler
+ * @author ashik
  *
  */
 public class Box {
@@ -16,6 +16,9 @@ public class Box {
 	private int y;			// the Y coordinate
     private boolean touched;	// if droid is touched/picked up
     private Paint paint;    //Paint object to draw blue rect
+
+    public static final int size = 150;
+    private static final String TAG = Box.class.getSimpleName();
 
 	public Box(int x, int y) {
 		//this.bitmap = bitmap;
@@ -50,7 +53,7 @@ public class Box {
 	}
 	
 	public void draw(Canvas canvas) {
-        canvas.drawRect(x, y, x+75, y+75, paint);
+        canvas.drawRect(x - size/2, y - size/2, x+size/2, y+size/2, paint);
 	}
 
 	/**
@@ -60,9 +63,11 @@ public class Box {
 	 * @param eventY - the event's Y coordinate
 	 */
 	public void handleActionDown(int eventX, int eventY) {
-		if (eventX >= (x - 75 / 2) && (eventX <= (x + 75/2))) {
-			if (eventY >= (y - 75 / 2) && (y <= (y + 75 / 2))) {
+		if (eventX >= (x - size / 2) && (eventX <= (x + size/2))) {
+			if (eventY >= (y - size / 2) && (eventY <= (y + size / 2))) {
 				// droid touched
+                Log.d(TAG, "Touch at x=" + eventX + ",y=" + eventY);
+                Log.d(TAG, "Box at x=" + x + ",y=" + y);
 				setTouched(true);
 			} else {
 				setTouched(false);
