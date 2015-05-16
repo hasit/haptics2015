@@ -18,46 +18,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="155a025f-9749-4425-9d37-34fe4defc02b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/gradle/wrapper/gradle-wrapper.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/androidTest/java/haptics2015/boxprototypev2/ApplicationTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/BoxPrototypev2.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/java/haptics2015/boxprototypev2/models/BoxView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/java/haptics2015/boxprototypev2/util/SystemUiHider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/java/haptics2015/boxprototypev2/util/SystemUiHiderBase.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/java/haptics2015/boxprototypev2/util/SystemUiHiderHoneycomb.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/java/haptics2015/boxprototypev2/TPadActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/res/layout-land/activity_tpad.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/app.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/res/values/attrs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/res/values/colors.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/gradle.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/.idea/gradle.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/gradlew.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/gradlew" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/proguard-rules.pro" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/settings.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/res/values/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/res/values/styles.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/res/values-v11/styles.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SingleBoxPrototype.iml" afterPath="$PROJECT_DIR$/SingleBoxPrototype.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tPadLib/tPadLib.iml" afterPath="$PROJECT_DIR$/tPadLib/tPadLib.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../BoxPrototypev2/tPadLib/tPadLib.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/java/haptics2015/boxprototypev2/models/BoxView.java" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/java/haptics2015/boxprototypev2/models/BoxView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/java/haptics2015/boxprototypev2/TPadActivity.java" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/src/main/java/haptics2015/boxprototypev2/TPadActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BoxPrototypev2/app/app.iml" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BoxPrototypev2/app/build.gradle" afterPath="$PROJECT_DIR$/../BoxPrototypev2/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BoxPrototypev2/.idea/gradle.xml" afterPath="$PROJECT_DIR$/../BoxPrototypev2/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BoxPrototypev2/.idea/modules.xml" afterPath="$PROJECT_DIR$/../BoxPrototypev2/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BoxPrototypev2/settings.gradle" afterPath="$PROJECT_DIR$/../BoxPrototypev2/settings.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SingleBoxPrototype.iws" />
@@ -126,8 +94,8 @@
       <file leaf-file-name="MainGamePanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/haptics/MainGamePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52991456">
-              <caret line="115" column="20" selection-start-line="86" selection-start-column="8" selection-end-line="115" selection-end-column="20" />
+            <state vertical-scroll-proportion="-0.20779221">
+              <caret line="51" column="43" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -139,7 +107,18 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="50" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#779#780#0" expanded="false" />
+                <element signature="e#794#795#0" expanded="false" />
+                <element signature="e#821#822#0" expanded="false" />
+                <element signature="e#838#839#0" expanded="false" />
+                <element signature="e#859#860#0" expanded="false" />
+                <element signature="e#874#875#0" expanded="false" />
+                <element signature="e#901#902#0" expanded="false" />
+                <element signature="e#918#919#0" expanded="false" />
+                <element signature="e#949#950#0" expanded="false" />
+                <element signature="e#970#971#0" expanded="false" />
+                <element signature="e#1014#1015#0" expanded="false" />
+                <element signature="e#1043#1044#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -2026,9 +2005,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane" />
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2037,33 +2015,10 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SingleBoxPrototype" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SingleBoxPrototype" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2296,14 +2251,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32867134" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2317,15 +2270,17 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19452888" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270869" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270869" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.55513597" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32867134" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -2347,6 +2302,53 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/haptics/MainGamePanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/haptics/model/Box.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding>
+            <element signature="e#779#780#0" expanded="false" />
+            <element signature="e#794#795#0" expanded="false" />
+            <element signature="e#821#822#0" expanded="false" />
+            <element signature="e#838#839#0" expanded="false" />
+            <element signature="e#859#860#0" expanded="false" />
+            <element signature="e#874#875#0" expanded="false" />
+            <element signature="e#901#902#0" expanded="false" />
+            <element signature="e#918#919#0" expanded="false" />
+            <element signature="e#949#950#0" expanded="false" />
+            <element signature="e#970#971#0" expanded="false" />
+            <element signature="e#1014#1015#0" expanded="false" />
+            <element signature="e#1043#1044#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/haptics/BoxActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/haptics/MainGamePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="29" column="74" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="74" />
           <folding />
         </state>
@@ -2357,7 +2359,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#779#780#0" expanded="false" />
+            <element signature="e#794#795#0" expanded="false" />
+            <element signature="e#821#822#0" expanded="false" />
+            <element signature="e#838#839#0" expanded="false" />
+            <element signature="e#859#860#0" expanded="false" />
+            <element signature="e#874#875#0" expanded="false" />
+            <element signature="e#901#902#0" expanded="false" />
+            <element signature="e#918#919#0" expanded="false" />
+            <element signature="e#949#950#0" expanded="false" />
+            <element signature="e#970#971#0" expanded="false" />
+            <element signature="e#1014#1015#0" expanded="false" />
+            <element signature="e#1043#1044#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2385,7 +2398,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="66" column="51" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="51" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#779#780#0" expanded="false" />
+            <element signature="e#794#795#0" expanded="false" />
+            <element signature="e#821#822#0" expanded="false" />
+            <element signature="e#838#839#0" expanded="false" />
+            <element signature="e#859#860#0" expanded="false" />
+            <element signature="e#874#875#0" expanded="false" />
+            <element signature="e#901#902#0" expanded="false" />
+            <element signature="e#918#919#0" expanded="false" />
+            <element signature="e#949#950#0" expanded="false" />
+            <element signature="e#970#971#0" expanded="false" />
+            <element signature="e#1014#1015#0" expanded="false" />
+            <element signature="e#1043#1044#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2456,7 +2480,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="50" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#779#780#0" expanded="false" />
+            <element signature="e#794#795#0" expanded="false" />
+            <element signature="e#821#822#0" expanded="false" />
+            <element signature="e#838#839#0" expanded="false" />
+            <element signature="e#859#860#0" expanded="false" />
+            <element signature="e#874#875#0" expanded="false" />
+            <element signature="e#901#902#0" expanded="false" />
+            <element signature="e#918#919#0" expanded="false" />
+            <element signature="e#949#950#0" expanded="false" />
+            <element signature="e#970#971#0" expanded="false" />
+            <element signature="e#1014#1015#0" expanded="false" />
+            <element signature="e#1043#1044#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2473,14 +2508,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="157" column="14" selection-start-line="157" selection-start-column="14" selection-end-line="157" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/haptics/MainGamePanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52991456">
-          <caret line="115" column="20" selection-start-line="86" selection-start-column="8" selection-end-line="115" selection-end-column="20" />
+        <state vertical-scroll-proportion="-0.20779221">
+          <caret line="51" column="43" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="43" />
           <folding />
         </state>
       </provider>

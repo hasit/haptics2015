@@ -16,12 +16,12 @@ import android.view.View;
 public class BoxView extends View {
 
     private float x = 300;			// the X coordinate
-    private float y = 500;			// the Y coordinate
+    private float y = 400;			// the Y coordinate
     private boolean touched;	    // if droid is touched/picked up
     private Paint paint;            //Paint object to draw blue rect
     private Paint platformPaint;    //Paint object to draw platform
 
-    public static final int size = 150;
+    public static final int size = 100;
     public static final int bgColor = Color.parseColor("#0099CC");
     public static final int boxColor = Color.parseColor("#0000A0");
 
