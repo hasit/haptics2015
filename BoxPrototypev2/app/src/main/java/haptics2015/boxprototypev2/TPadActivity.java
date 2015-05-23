@@ -34,9 +34,10 @@ public class TPadActivity extends Activity {
             int progress = 0;
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
-                progress = progresValue;
-                friction = progresValue;
+            public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+                progressValue = (progressValue/10 + 1) * 10;
+                progress = progressValue;
+                friction = progressValue;
                 frictionValue.setText(Integer.toString(friction));
             }
 
@@ -63,13 +64,14 @@ public class TPadActivity extends Activity {
             // the gestures
             if (boxView.isTouched()) {
                 // the box was picked up and is being dragged
-                //if(friction == 0)
-                //    mTpad.turnOff();
-                //else
-                //mTpad.sendVibration(TPadVibration.SINUSOID, 100+2*friction, 1.0f);
+                if(friction == 0)
+                    mTpad.turnOff();
+                else {
+                    //mTpad.sendVibration(TPadVibration.SINUSOID, 100+2*friction, 1.0f);
                     //mTpad.sendVibration(TPadVibration.SINUSOID, 250, 1.0f);
-                float pos = (event.getX()%100)/10;
-                mTpad.sendFriction((float)(pos%2));
+                    float fric = (event.getX() / friction) % 2;
+                    mTpad.sendFriction(fric);
+                }
                 if(event.getX() > 150 && event.getX() < boxView.getWidth() - 150) {
                     boxView.setBoxX((int) event.getX());
                     boxView.invalidate();
