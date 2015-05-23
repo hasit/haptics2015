@@ -66,9 +66,10 @@ public class TPadActivity extends Activity {
                 //if(friction == 0)
                 //    mTpad.turnOff();
                 //else
-                    mTpad.sendVibration(TPadVibration.SINUSOID, 100+2*friction, 1.0f);
+                //mTpad.sendVibration(TPadVibration.SINUSOID, 100+2*friction, 1.0f);
                     //mTpad.sendVibration(TPadVibration.SINUSOID, 250, 1.0f);
-                    //mTpad.sendFriction(1 + friction/100);
+                float pos = (event.getX()%100)/10;
+                mTpad.sendFriction((float)(pos%2));
                 if(event.getX() > 150 && event.getX() < boxView.getWidth() - 150) {
                     boxView.setBoxX((int) event.getX());
                     boxView.invalidate();

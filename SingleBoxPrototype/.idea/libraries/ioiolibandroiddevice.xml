@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="ioiolibandroiddevice">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/tPadLib/libs/ioiolibandroiddevice.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
