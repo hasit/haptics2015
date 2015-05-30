@@ -14,7 +14,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
+import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 
 public class SimplePhysicBox2d extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -26,9 +29,12 @@ public class SimplePhysicBox2d extends ApplicationAdapter {
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
     OrthographicCamera camera;
-    BitmapFont font;
+    //BitmapFont font;
 
-    float torque = 0.0f;
+    private MouseJointDef jointDef;
+    private MouseJoint joint;
+
+    //float torque = 0.0f;
     boolean drawSprite = true;
 
     final float PIXELS_TO_METERS = 100f;
@@ -81,35 +87,68 @@ public class SimplePhysicBox2d extends ApplicationAdapter {
         FixtureDef fixtureDef2 = new FixtureDef();
 
         EdgeShape edgeShape = new EdgeShape();
-        edgeShape.set(-w/2, -h/2, w/2, h/2);
+        edgeShape.set(-w/2, -h/2, w/2, -h/2);
         fixtureDef2.shape = edgeShape;
 
         bodyEdgeScreen = world.createBody(bodyDef2);
         bodyEdgeScreen.createFixture(fixtureDef2);
         edgeShape.dispose();
 
+        jointDef = new MouseJointDef();
+        jointDef.bodyB = body;
+        jointDef.collideConnected = true;
+        jointDef.maxForce = 500;
 
         Gdx.input.setInputProcessor(new InputAdapter() {
+            private Vector3 tmp = new Vector3();
+            private Vector2 tmp2 = new Vector2();
+
+            private QueryCallback queryCallback = new QueryCallback() {
+
+                @Override
+                public boolean reportFixture(Fixture fixture) {
+                    if(!fixture.testPoint(tmp.x, tmp.y))
+                        return true;
+
+                    jointDef.bodyB = fixture.getBody();
+                    jointDef.target.set(tmp.x, tmp.y);
+                    joint = (MouseJoint) world.createJoint(jointDef);
+                    return false;
+                }
+
+            };
             //on touch we apply force from the direction of the users touch
             public boolean touchDown(int screenX, int screenY, int pointer, int button){
-                body.applyForce(1f,1f,screenX, screenY, true);
-                sprite.setPosition(screenX, screenY);
+                System.out.println("TouchDown!");
+                camera.unproject(tmp.set(screenX, screenY, 0));
+                world.QueryAABB(queryCallback, tmp.x, tmp.y, tmp.x, tmp.y);
                 return true;
             }
 
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                return false;
+                System.out.println("TouchUp!");
+                if(joint == null)
+                    return false;
+
+                world.destroyJoint(joint);
+                joint = null;
+                return true;
             }
 
             public boolean touchDragged(int screenX, int screenY, int pointer) {
-                sprite.setPosition(screenX, screenY);
-                return false;
+                System.out.println("TouchDragged!");
+                if(joint == null)
+                    return false;
+
+                camera.unproject(tmp.set(screenX, screenY, 0));
+                joint.setTarget(tmp2.set(tmp.x, tmp.y));
+                return true;
             }
         });
 
         debugRenderer = new Box2DDebugRenderer();
-        font = new BitmapFont();
-        font.setColor(Color.BLACK);
+        //font = new BitmapFont();
+        //font.setColor(Color.BLACK);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
@@ -122,7 +161,7 @@ public class SimplePhysicBox2d extends ApplicationAdapter {
 		//upate rate to the frame rate, and vice versa
 		world.step(1f / 60f, 6, 2);
 
-        float w = Gdx.graphics.getWidth();
+        /*float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
         if(sprite.getX() > w){
@@ -133,9 +172,33 @@ public class SimplePhysicBox2d extends ApplicationAdapter {
 
         if(sprite.getY() > h){
             sprite.setY(h - 50);
-        }
+        }*/
 
-		//update spritee position accordingly
+
+        /*if(Gdx.input.isTouched()) {
+            //Vector3 touchPosition = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+            //camera.unproject(touchPosition);
+            float x = -Gdx.input.getX();
+            float y = -Gdx.input.getY();
+
+            float w = sprite.getWidth();
+            float h = sprite.getHeight();
+
+            float newX = (-x - 1.5f * w) / PIXELS_TO_METERS;
+            float newY = (y + 2.5f * h) / PIXELS_TO_METERS;
+
+            float sX = body.getPosition().x - 1.5f*w;
+            float sY = body.getPosition().y - 2.5f*h;
+
+            System.out.println("Touched: " + x + ", " + y);
+            System.out.println("Body at: " + sX + ", " + sY);
+            //System.out.println("Body size: " + w + ", " + h);
+
+            if(x > sX - w/2 && x < sX + w/2 && y > sY - h/2 && y < sY + h/2)
+                body.setTransform(newX,newY, 0);
+
+        }*/
+		//update sprite position accordingly
 		sprite.setPosition((body.getPosition().x * PIXELS_TO_METERS) - sprite.getWidth()/2, (body.getPosition().y * PIXELS_TO_METERS) - sprite.getHeight()/2);
 
         sprite.setRotation((float) Math.toDegrees(body.getAngle()));
@@ -151,7 +214,7 @@ public class SimplePhysicBox2d extends ApplicationAdapter {
         if(drawSprite)
 		    batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(),sprite.getOriginY(),sprite.getWidth(),sprite.getHeight(),sprite.getScaleX(),sprite.getScaleY(),sprite.getRotation());
 
-        font.draw(batch, "Restitution: " + body.getFixtureList().first().getRestitution(), -Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        //font.draw(batch, "Restitution: " + body.getFixtureList().first().getRestitution(), -Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 
 		batch.end();
 
