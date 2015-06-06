@@ -73,8 +73,8 @@ public class TPadActivity extends Activity {
                     mTpad.sendFriction(fric);
                 }
                 if(event.getX() > 150 && event.getX() < boxView.getWidth() - 150) {
-                    boxView.setBoxX((int) event.getX());
-                    boxView.invalidate();
+                    //boxView.setBoxX((int) event.getX());
+                    //boxView.invalidate();
                 }
             } else {
                 mTpad.turnOff();
