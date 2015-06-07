@@ -28,7 +28,15 @@ public class PhysicsBox extends ApplicationAdapter {
 
 	World world;
 	Body boxBody;
-	Body ground;
+
+    Body ground;
+    Body leftEdge;
+    Body rightEdge;
+    Body topEdge;
+    Body slope;
+
+    Body controller;
+
 	Sprite sprite;
 
 	Camera camera;
@@ -52,7 +60,8 @@ public class PhysicsBox extends ApplicationAdapter {
         touchPoint.x /= SCALE;
         touchPoint.y /= SCALE;
 
-		Vector2 relativePos = boxBody.getLocalPoint(new Vector2(touchPoint.x, touchPoint.y));
+		//Vector2 relativePos = boxBody.getLocalPoint(new Vector2(touchPoint.x, touchPoint.y));
+        Vector2 relativePos = controller.getLocalPoint(new Vector2(touchPoint.x, touchPoint.y));
 
 		if (Math.abs(relativePos.x) <= sprite.getWidth()/2/SCALE && Math.abs(relativePos.y) <= sprite.getHeight()/2/SCALE) {
 			return true;
@@ -71,12 +80,13 @@ public class PhysicsBox extends ApplicationAdapter {
 		img = new Texture("uw.jpg");
 		sprite = new Sprite(img);
 
-		world = new World(new Vector2(0, -10f), true);
+		world = new World(new Vector2(0, -5f), true);
 
 		//Box
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
 		bodyDef.position.set(0,0);
+        //bodyDef.gravityScale = 0;
 
 		boxBody = world.createBody(bodyDef);
 
@@ -85,53 +95,143 @@ public class PhysicsBox extends ApplicationAdapter {
 
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = bodyShape;
-		fixtureDef.density = 0.1f;
-		fixtureDef.restitution = 0.6f;
+        fixtureDef.friction = 0.2f;
+        fixtureDef.density = 0.1f;
+		fixtureDef.restitution = 0.2f;
 
 		boxBody.createFixture(fixtureDef);
 
 		bodyShape.dispose();
 
-		//Edges
-		BodyDef groundDef = new BodyDef();
-		groundDef.type = BodyDef.BodyType.StaticBody;
-		groundDef.position.set(0,0);
+        //Controller
+        bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(-10,10);
+        bodyDef.gravityScale = 0;
 
-		FixtureDef groundFixture = new FixtureDef();
+        controller = world.createBody(bodyDef);
 
-		EdgeShape groundEdge = new EdgeShape();
+        bodyShape = new PolygonShape();
+        //bodyShape.setRadius(sprite.getWidth() / 2 / SCALE);
+        bodyShape.setAsBox(sprite.getWidth()/2/SCALE, sprite.getHeight()/2/SCALE);
 
-		Vector2 xy1 = getXY(0, (screenHeight - 50));
-		Vector2 xy2 = getXY(screenWidth, (screenHeight - 50));
+        fixtureDef = new FixtureDef();
+        fixtureDef.shape = bodyShape;
+        fixtureDef.density = 2f;
 
-		//float x1 = 0, y1 = (screenHeight - 50) / WORLD_SCALE;
-		//float x2 = screenWidth / WORLD_SCALE, y2  = y1;
+        controller.createFixture(fixtureDef);
 
-		groundEdge.set(xy1.x/SCALE, xy1.y/SCALE, xy2.x/SCALE, xy2.y/SCALE);
+        bodyShape.dispose();
 
-		groundFixture.shape = groundEdge;
+		//Ground edge
+		BodyDef edgeDef = new BodyDef();
+		edgeDef.type = BodyDef.BodyType.StaticBody;
+		edgeDef.position.set(0,0);
+		FixtureDef edgeFixture = new FixtureDef();
+    	EdgeShape edge = new EdgeShape();
+		Vector2 xy1 = getXY(50, screenHeight - 50);
+		Vector2 xy2 = getXY(screenWidth - 50, screenHeight - 50);
+		edge.set(xy1.x/SCALE, xy1.y/SCALE, xy2.x/SCALE, xy2.y/SCALE);
+		edgeFixture.shape = edge;
+		ground = world.createBody(edgeDef);
+		ground.createFixture(edgeFixture);
+		edge.dispose();
 
-		ground = world.createBody(groundDef);
-		ground.createFixture(groundFixture);
+        //Left edge
+        edge = new EdgeShape();
+        xy1 = getXY(50, screenHeight - 50);
+        xy2 = getXY(50, 50);
+        edge.set(xy1.x/SCALE, xy1.y/SCALE, xy2.x/SCALE, xy2.y/SCALE);
+        edgeFixture.shape = edge;
+        leftEdge = world.createBody(edgeDef);
+        leftEdge.createFixture(edgeFixture);
+        edge.dispose();
 
-		groundEdge.dispose();
+        //Right edge
+        edge = new EdgeShape();
+        xy1 = getXY(screenWidth - 50, screenHeight - 50);
+        xy2 = getXY(screenWidth - 50, 50);
+        edge.set(xy1.x/SCALE, xy1.y/SCALE, xy2.x/SCALE, xy2.y/SCALE);
+        edgeFixture.shape = edge;
+        rightEdge = world.createBody(edgeDef);
+        rightEdge.createFixture(edgeFixture);
+        edge.dispose();
+
+        //Top edge
+        edge = new EdgeShape();
+        xy1 = getXY(50, 50);
+        xy2 = getXY(screenWidth - 50, 50);
+        edge.set(xy1.x/SCALE, xy1.y/SCALE, xy2.x/SCALE, xy2.y/SCALE);
+        edgeFixture.shape = edge;
+        topEdge = world.createBody(edgeDef);
+        topEdge.createFixture(edgeFixture);
+        edge.dispose();
+
+        //Slope
+
+        /*edge = new EdgeShape();
+        xy1 = getXY(screenWidth/2, screenHeight-50);
+        xy2 = getXY(screenWidth - 50, screenHeight/2);
+        edge.set(xy1.x/SCALE, xy1.y/SCALE, xy2.x/SCALE, xy2.y/SCALE);
+        edgeFixture.shape = edge;
+        Body slopeEdge = world.createBody(edgeDef);
+        slopeEdge.createFixture(edgeFixture);
+        edge.dispose();*/
+
+        BodyDef slopeDef = new BodyDef();
+        slopeDef.type = BodyDef.BodyType.StaticBody;
+        slopeDef.position.set(0,0);
+
+        slope = world.createBody(slopeDef);
+
+        PolygonShape slopeShape = new PolygonShape();
+        Vector2 tr1 = getXY(screenWidth/2, screenHeight-50); tr1.x /= SCALE; tr1.y /= SCALE;
+        Vector2 tr2 = getXY(screenWidth-50, screenHeight-50); tr2.x /= SCALE; tr2.y /= SCALE;
+        Vector2 tr3 = getXY(screenWidth-50, screenHeight/2); tr3.x /= SCALE; tr3.y /= SCALE;
+
+        Vector2[] triangle = {tr1, tr2, tr3};
+        slopeShape.set(triangle);
+
+        FixtureDef triangleFixtureDef = new FixtureDef();
+        triangleFixtureDef.shape = slopeShape;
+        triangleFixtureDef.friction = 0.2f;
+        triangleFixtureDef.density = 0.1f;
+        triangleFixtureDef.restitution = 0.2f;
+
+        slope.createFixture(triangleFixtureDef);
+        slopeShape.dispose();
 
 		debugRenderer = new Box2DDebugRenderer();
 
         collisionDetection = new DetectCollision(this);
 		//Touch events
 		Gdx.input.setInputProcessor(new InputAdapter() {
+
 			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-				if(isTouched(screenX, screenY))
-					boxBody.setActive(false);
+				//if(isTouched(screenX, screenY)) {
+                    //boxBody.setAngularVelocity(0);
+                    //boxBody.setLinearVelocity(0,0);
+                    //boxBody.setActive(false);
+                //}
+
+                Vector2 newPos = getXY(screenX, screenY);
+                newPos.x /= SCALE; newPos.y /= SCALE;
+                controller.setTransform(newPos.x, newPos.y, 0);
+                controller.setAngularVelocity(0);
 
 				return true;
 			}
 
 			@Override
 			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-				boxBody.setActive(true);
+				//boxBody.setActive(true);
+                controller.setLinearVelocity(0,0);
+                controller.setAngularVelocity(0);
+
+                Vector2 newPos = getXY(screenX, screenY);
+                newPos.x /= SCALE; newPos.y /= SCALE;
+                controller.setTransform(newPos, 0);
 
 				return true;
 			}
@@ -139,19 +239,27 @@ public class PhysicsBox extends ApplicationAdapter {
 			@Override
 			public boolean touchDragged(int screenX, int screenY, int pointer) {
                 if(isTouched(screenX, screenY)) {
+
                     Vector2 newPos = getXY(screenX, screenY);
                     newPos.x /= SCALE; newPos.y /= SCALE;
 
-                    float lowerX = newPos.x - sprite.getWidth()/2/SCALE;
+                    /*float lowerX = newPos.x - sprite.getWidth()/2/SCALE;
                     float lowerY = newPos.y - sprite.getHeight()/2/SCALE;
                     float upperX = newPos.x + sprite.getWidth()/2/SCALE;
                     float upperY = newPos.y + sprite.getHeight()/2/SCALE;
 
                     collisionDetection.collision = false;
-                    world.QueryAABB(collisionDetection, lowerX-0.1f, lowerY-0.1f, upperX+0.1f, upperY+0.1f);
+                    collisionDetection.setPoint(newPos);
+                    world.QueryAABB(collisionDetection, lowerX, lowerY, upperX, upperY);
 
                     if (!collisionDetection.collision)
-                        boxBody.setTransform(newPos.x, newPos.y, 0);
+                        //boxBody.setTransform(newPos.x, newPos.y, 0);
+                        controller.setTransform(newPos.x, newPos.y, 0);*/
+
+                    float vx = newPos.x - controller.getPosition().x;
+                    float vy = newPos.y - controller.getPosition().y;
+                    controller.setLinearVelocity(100*vx, 100*vy);
+                    controller.setAngularVelocity(0);
                 }
 				return true;
 			}
@@ -171,6 +279,7 @@ public class PhysicsBox extends ApplicationAdapter {
 		debugMatrix = batch.getProjectionMatrix().cpy().scale(SCALE, SCALE, 0);
 
 		sprite.setPosition(boxBody.getPosition().x * SCALE - img.getWidth() / 2, boxBody.getPosition().y*SCALE - img.getHeight() / 2);
+		sprite.setRotation((float) Math.toDegrees(boxBody.getAngle()));
 
 		batch.begin();
 		batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(), sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
@@ -189,18 +298,41 @@ public class PhysicsBox extends ApplicationAdapter {
 class DetectCollision implements QueryCallback {
     PhysicsBox pbox;
     Boolean collision;
+    Vector2 touchPoint;
 
     public DetectCollision(PhysicsBox pbox) {
         this.pbox = pbox;
         collision = false;
     }
+
+    public void setPoint(Vector2 point) {
+        touchPoint = point;
+    }
+
     @Override
     public boolean reportFixture(Fixture fixture) {
-        if(fixture.getBody() != pbox.boxBody) {
-            //System.out.println("Collision!" + fixture.getBody().toString());
+        if(fixture.getBody() == pbox.boxBody) {
             collision = true;
-            return true;
         }
-        return false;
+        /*if(fixture.getBody() != pbox.boxBody) {
+            //System.out.println("Collision!" + fixture.getBody().toString());
+
+            float w = pbox.sprite.getWidth()/2/pbox.SCALE;
+            float h = pbox.sprite.getHeight()/2/pbox.SCALE;
+
+            if(fixture.getBody() == pbox.ground || fixture.getBody() == pbox.leftEdge
+                    || fixture.getBody() == pbox.rightEdge
+                    || fixture.getBody() == pbox.topEdge) {
+                collision = true;
+            } else if (
+                    fixture.testPoint(touchPoint.x - w, touchPoint.y - h)
+                    || fixture.testPoint(touchPoint.x - w, touchPoint.y + h)
+                    || fixture.testPoint(touchPoint.x + w, touchPoint.y - h)
+                    || fixture.testPoint(touchPoint.x + w, touchPoint.y + h)
+               ) {
+                //collision = true;
+            }
+        }*/
+        return collision;
     }
 }
