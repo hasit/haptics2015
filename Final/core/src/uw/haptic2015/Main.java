@@ -11,17 +11,13 @@ import uw.haptic2015.screens.LandingScreen;
 import uw.haptic2015.screens.scenes.SlopeScene;
 
 public class Main extends Game {
-	SpriteBatch batch;
-	Texture img;
-	SlopeScene slopeScene;
-	LandingScreen landingScreen;
+	public SlopeScene slopeScene;
+	public LandingScreen landingScreen;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
 		slopeScene = new SlopeScene(this);
 		landingScreen = new LandingScreen(this);
-        setScreen(slopeScene);
+        setScreen(landingScreen);
 	}
 }
