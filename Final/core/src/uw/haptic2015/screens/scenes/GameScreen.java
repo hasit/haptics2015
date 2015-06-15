@@ -23,6 +23,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 
 import uw.haptic2015.Main;
 
@@ -38,6 +40,8 @@ public class GameScreen implements Screen {
     World world;
     Body boxBody;
 
+    Sprite playButton, settingsButton;
+
     Body ground;
     Body leftEdge;
     Body rightEdge;
@@ -48,6 +52,8 @@ public class GameScreen implements Screen {
     Camera camera;
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
+
+    boolean physicsEnabled = false;
 
     final float SCALE = 100f;
     final float MARGIN = 10f;
@@ -64,9 +70,21 @@ public class GameScreen implements Screen {
         return new Vector2(v3.x, v3.y);
     }
 
+    boolean playTouched(int screenX, int screenY) {
+        Vector2 touchPoint = getXY(screenX, screenY);
+
+        System.out.println("Touched: " + screenX + ", " + screenY);
+        System.out.println("Translated: " + touchPoint.x + ", " + touchPoint.y);
+        System.out.println("Play at: " + playButton.getX() + ", " + playButton.getY());
+
+        if(playButton.getBoundingRectangle().contains(touchPoint)) {
+            return true;
+        }
+        return false;
+    }
+
     boolean isTouched(int screenX, int screenY) {
-        Vector3 touchPoint = new Vector3(screenX, screenY, 0);
-        camera.unproject(touchPoint);
+        Vector2 touchPoint = getXY(screenX, screenY);
         touchPoint.x /= SCALE;
         touchPoint.y /= SCALE;
 
@@ -164,12 +182,24 @@ public class GameScreen implements Screen {
 
         debugRenderer = new Box2DDebugRenderer();
 
+        playButton = new Sprite(new Texture("play.png"));
+        xy1 = getXY(150, 250);
+        playButton.setPosition(xy1.x, xy1.y);
+
         collisionDetection = new DetectCollision(this);
         //Touch events
         Gdx.input.setInputProcessor(new InputAdapter() {
 
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                System.out.println("Touched!!");
+                if (playTouched(screenX, screenY)) {
+                    physicsEnabled = ! physicsEnabled;
+//                    world.setContinuousPhysics(physicsEnabled);
+//                    world.
+//                    System.out.println("Play/Pause");
+                }
+
                 if (isTouched(screenX, screenY)) {
                     boxBody.setAngularVelocity(0);
                     boxBody.setLinearVelocity(0, 0);
@@ -214,7 +244,9 @@ public class GameScreen implements Screen {
     @Override
     public void render (float delta) {
         camera.update();
-        world.step(1f / 60f, 6, 2);
+        if (physicsEnabled) {
+            world.step(1f / 60f, 6, 2);
+        }
 
         Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -227,6 +259,7 @@ public class GameScreen implements Screen {
 
         batch.begin();
         batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(), sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
+        batch.draw(playButton, playButton.getX(), playButton.getY());
         batch.end();
 
         debugRenderer.render(world, debugMatrix);
