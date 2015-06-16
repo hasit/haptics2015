@@ -36,6 +36,7 @@ public class LandingScreen implements Screen {
         camera.setToOrtho(false, screenWidth, screenHeight);
 
         batch = new SpriteBatch();
+
         img = new Texture("grey_grid_landscape.png");
         //img.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
