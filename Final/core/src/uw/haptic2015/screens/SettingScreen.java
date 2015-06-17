@@ -18,7 +18,7 @@ import java.awt.Button;
 import uw.haptic2015.Main;
 
 /**
- * Created by hasit on 6/13/15.
+ * Created by hasit on 6/16/15.
  */
 
 public class SettingScreen implements Screen {
