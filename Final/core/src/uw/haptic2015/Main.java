@@ -12,6 +12,7 @@ public class Main extends Game {
 	public GameScreen slopeScene;
 	public LandingScreen landingScreen;
 	public SettingScreen settingScreen;
+	public Config config;
 
 	public TPad mtpad;
 	public Main(TPad mtpad) {
@@ -20,6 +21,7 @@ public class Main extends Game {
 
 	@Override
 	public void create () {
+		config = new Config();
 		landingScreen = new LandingScreen(this);
 		slopeScene = new SlopeScene(this);
 		//settingScreen = new SettingScreen(this);
