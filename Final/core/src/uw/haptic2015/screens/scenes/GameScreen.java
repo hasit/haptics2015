@@ -192,12 +192,9 @@ public class GameScreen implements Screen {
 
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                System.out.println("Touched!!");
+
                 if (playTouched(screenX, screenY)) {
                     physicsEnabled = ! physicsEnabled;
-//                    world.setContinuousPhysics(physicsEnabled);
-//                    world.
-//                    System.out.println("Play/Pause");
                 }
 
                 if (isTouched(screenX, screenY)) {
@@ -212,6 +209,7 @@ public class GameScreen implements Screen {
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
                 boxBody.setActive(true);
+                main.mtpad.turnOff();
                 return true;
             }
 
@@ -235,6 +233,8 @@ public class GameScreen implements Screen {
                     if (!collisionDetection.collision)
                         boxBody.setTransform(newPos.x, newPos.y, 0);
                 }
+
+                main.mtpad.sendFriction(1);
                 return true;
             }
 
