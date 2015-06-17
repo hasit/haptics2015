@@ -18,29 +18,27 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
+import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 
 import uw.haptic2015.Main;
 
 /**
  * Created by jerrychen on 6/13/15.
  */
-public class GameScreen implements Screen {
+public class GameScreen extends InputAdapter implements Screen {
 
     Main main;
     SpriteBatch batch;
     Texture img;
-    DetectCollision collisionDetection;
+
     World world;
     Body boxBody;
 
-    Sprite playButton, settingsButton;
+    //Sprite settingsButton;
 
     Body ground;
     Body leftEdge;
@@ -53,12 +51,13 @@ public class GameScreen implements Screen {
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
 
-    boolean physicsEnabled = false;
-
     final float SCALE = 100f;
     final float MARGIN = 10f;
     float screenWidth;
     float screenHeight;
+
+    MouseJointDef jointDef;
+    MouseJoint joint;
 
     public GameScreen(Main main){
         this.main = main;
@@ -68,19 +67,6 @@ public class GameScreen implements Screen {
     Vector2 getXY(float x, float y) {
         Vector3 v3 = camera.unproject(new Vector3(x, y, 0));
         return new Vector2(v3.x, v3.y);
-    }
-
-    boolean playTouched(int screenX, int screenY) {
-        Vector2 touchPoint = getXY(screenX, screenY);
-
-        System.out.println("Touched: " + screenX + ", " + screenY);
-        System.out.println("Translated: " + touchPoint.x + ", " + touchPoint.y);
-        System.out.println("Play at: " + playButton.getX() + ", " + playButton.getY());
-
-        if(playButton.getBoundingRectangle().contains(touchPoint)) {
-            return true;
-        }
-        return false;
     }
 
     boolean isTouched(int screenX, int screenY) {
@@ -112,14 +98,12 @@ public class GameScreen implements Screen {
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
 
-        System.out.println("W: " + screenWidth + ", H: " + screenHeight);
-
         camera = new OrthographicCamera(screenWidth, screenHeight);
 
         //Box
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(0,0);
+        bodyDef.position.set(-1,1);
 
         boxBody = world.createBody(bodyDef);
 
@@ -182,71 +166,59 @@ public class GameScreen implements Screen {
 
         debugRenderer = new Box2DDebugRenderer();
 
-        playButton = new Sprite(new Texture("play.png"));
-        xy1 = getXY(150, 250);
-        playButton.setPosition(xy1.x, xy1.y);
-
-        collisionDetection = new DetectCollision(this);
         //Touch events
-        Gdx.input.setInputProcessor(new InputAdapter() {
+        jointDef = new MouseJointDef();
+        jointDef.bodyA = ground;
+        jointDef.bodyB = boxBody;
+        jointDef.collideConnected = true;
+        jointDef.maxForce = 100;
 
-            @Override
-            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Gdx.input.setInputProcessor(this);
+    }
 
-                if (playTouched(screenX, screenY)) {
-                    physicsEnabled = ! physicsEnabled;
-                }
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-                if (isTouched(screenX, screenY)) {
-                    boxBody.setAngularVelocity(0);
-                    boxBody.setLinearVelocity(0, 0);
-                    boxBody.setActive(false);
-                }
+        if (isTouched(screenX, screenY)) {
+            Vector2 newPos = getXY(screenX, screenY);
+            newPos.x /= SCALE;
+            newPos.y /= SCALE;
 
-                return true;
-            }
+            jointDef.target.set(newPos);
+            joint = (MouseJoint) world.createJoint(jointDef);
+        }
 
-            @Override
-            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                boxBody.setActive(true);
-                main.mtpad.turnOff();
-                return true;
-            }
+        return true;
+    }
 
-            @Override
-            public boolean touchDragged(int screenX, int screenY, int pointer) {
-                if (isTouched(screenX, screenY)) {
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        main.mtpad.turnOff();
 
-                    Vector2 newPos = getXY(screenX, screenY);
-                    newPos.x /= SCALE;
-                    newPos.y /= SCALE;
+        if(joint == null) return false;
 
-                    float lowerX = newPos.x - sprite.getWidth() / 2 / SCALE;
-                    float lowerY = newPos.y - sprite.getHeight() / 2 / SCALE;
-                    float upperX = newPos.x + sprite.getWidth() / 2 / SCALE;
-                    float upperY = newPos.y + sprite.getHeight() / 2 / SCALE;
+        world.destroyJoint(joint);
+        joint = null;
+        return true;
+    }
 
-                    collisionDetection.collision = false;
-                    collisionDetection.setPoint(newPos);
-                    world.QueryAABB(collisionDetection, lowerX, lowerY, upperX, upperY);
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        if(joint == null) return false;
+        Vector2 newPos = getXY(screenX, screenY);
+        newPos.x /= SCALE;
+        newPos.y /= SCALE;
 
-                    if (!collisionDetection.collision)
-                        boxBody.setTransform(newPos.x, newPos.y, 0);
-                }
+        joint.setTarget(newPos);
 
-                main.mtpad.sendFriction(1);
-                return true;
-            }
-
-        });
+        main.mtpad.sendFriction(1);
+        return true;
     }
 
     @Override
     public void render (float delta) {
         camera.update();
-        if (physicsEnabled) {
-            world.step(1f / 60f, 6, 2);
-        }
+        world.step(1f / 60f, 6, 2);
 
         Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -259,7 +231,6 @@ public class GameScreen implements Screen {
 
         batch.begin();
         batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(), sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
-        batch.draw(playButton, playButton.getX(), playButton.getY());
         batch.end();
 
         debugRenderer.render(world, debugMatrix);
@@ -296,42 +267,5 @@ public class GameScreen implements Screen {
         // never called automatically
         img.dispose();
         world.dispose();
-    }
-}
-
-class DetectCollision implements QueryCallback {
-    GameScreen pbox;
-    Boolean collision;
-    Vector2 touchPoint;
-
-    public DetectCollision(GameScreen pbox) {
-        this.pbox = pbox;
-        collision = false;
-    }
-
-    public void setPoint(Vector2 point) {
-        touchPoint = point;
-    }
-
-    @Override
-    public boolean reportFixture(Fixture fixture) {
-        if(fixture.getBody() != pbox.boxBody) {
-            float w = pbox.sprite.getWidth()/2/pbox.SCALE;
-            float h = pbox.sprite.getHeight()/2/pbox.SCALE;
-
-            if(fixture.getBody() == pbox.ground || fixture.getBody() == pbox.leftEdge
-                    || fixture.getBody() == pbox.rightEdge
-                    || fixture.getBody() == pbox.topEdge) {
-                collision = true;
-            } else if (
-                    fixture.testPoint(touchPoint.x - w, touchPoint.y - h)
-                            || fixture.testPoint(touchPoint.x - w, touchPoint.y + h)
-                            || fixture.testPoint(touchPoint.x + w, touchPoint.y - h)
-                            || fixture.testPoint(touchPoint.x + w, touchPoint.y + h)
-                    ) {
-                collision = true;
-            }
-        }
-        return collision;
     }
 }
