@@ -28,7 +28,7 @@ public class SpringScene extends GameScreen{
         springLeft = getXY(MARGIN, screenHeight - MARGIN);
         springRestPoint = new Vector2(0, springLeft.y);
 
-        springSprite.setPosition(springLeft.x-10, springLeft.y);
+        springSprite.setPosition(springLeft.x - 10, springLeft.y);
     }
 
     @Override
