@@ -68,15 +68,13 @@ public class SettingScreen implements Screen {
         applyButton.addListener(new ClickListener() {
             @Override
             public void clicked (InputEvent event, float x, float y) {
-                //System.out.println("applyButton Pressed");
-                main.setScreen(main.slopeScene);
+                main.setScreen(main.activeScreen);
             }
         });
 
         stage.addActor(applyButton);
         Gdx.input.setInputProcessor(stage);
     }
-
 
     @Override
     public void hide() {
