@@ -61,7 +61,6 @@ public class GameScreen extends InputAdapter implements Screen {
 
     public GameScreen(Main main){
         this.main = main;
-
     }
 
     Vector2 getXY(float x, float y) {
@@ -103,7 +102,10 @@ public class GameScreen extends InputAdapter implements Screen {
         //Box
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(-1,1);
+        //Place box on the ground at the middle of the screen.
+        Vector2 groundCoords = getXY(MARGIN, screenHeight - MARGIN);
+        groundCoords.x = 0; groundCoords.y = groundCoords.y/SCALE + sprite.getHeight()/2/SCALE;
+        bodyDef.position.set(groundCoords);
 
         boxBody = world.createBody(bodyDef);
 
@@ -216,12 +218,16 @@ public class GameScreen extends InputAdapter implements Screen {
         return true;
     }
 
+    public void drawSprites() {
+        batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(), sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
+    }
+
     @Override
     public void render (float delta) {
         camera.update();
         world.step(1f / 60f, 6, 2);
 
-        Gdx.gl.glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
+        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.setProjectionMatrix(camera.combined);
@@ -231,7 +237,7 @@ public class GameScreen extends InputAdapter implements Screen {
         sprite.setRotation((float) Math.toDegrees(boxBody.getAngle()));
 
         batch.begin();
-        batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(), sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
+        drawSprites();
         batch.end();
 
         debugRenderer.render(world, debugMatrix);
@@ -250,6 +256,7 @@ public class GameScreen extends InputAdapter implements Screen {
     @Override
     public void hide() {
         // called when current screen changes from this to a different screen
+        this.dispose();
     }
 
 
@@ -267,6 +274,8 @@ public class GameScreen extends InputAdapter implements Screen {
     public void dispose() {
         // never called automatically
         img.dispose();
+        batch.dispose();
+        debugRenderer.dispose();
         world.dispose();
     }
 }
