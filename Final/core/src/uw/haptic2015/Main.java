@@ -22,7 +22,7 @@ public class Main extends Game {
 	public void create () {
 		landingScreen = new LandingScreen(this);
 		slopeScene = new SlopeScene(this);
-		//settingScreen = new SettingScreen(this);
+		settingScreen = new SettingScreen(this);
         setScreen(settingScreen);
 	}
 }
