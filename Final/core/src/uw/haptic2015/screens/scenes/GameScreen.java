@@ -175,6 +175,8 @@ public class GameScreen extends InputAdapter implements Screen {
         jointDef.collideConnected = true;
         jointDef.maxForce = 100;
 
+
+
         Gdx.input.setInputProcessor(this);
     }
 
@@ -250,8 +252,9 @@ public class GameScreen extends InputAdapter implements Screen {
     public void show() {
         // called when this screen is set as the screen with game.setScreen();
         create();
-    }
 
+        main.activeScreen = this;
+    }
 
     @Override
     public void hide() {
@@ -259,16 +262,13 @@ public class GameScreen extends InputAdapter implements Screen {
         this.dispose();
     }
 
-
     @Override
     public void pause() {
     }
 
-
     @Override
     public void resume() {
     }
-
 
     @Override
     public void dispose() {
