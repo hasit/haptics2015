@@ -81,6 +81,7 @@ public class SettingScreen implements Screen {
     @Override
     public void hide() {
         // called when current screen changes from this to a different screen
+        this.dispose();
     }
 
 
@@ -97,5 +98,6 @@ public class SettingScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
+        skin.dispose();
     }
 }

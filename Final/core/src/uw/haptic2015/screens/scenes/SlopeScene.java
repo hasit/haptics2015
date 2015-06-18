@@ -20,6 +20,9 @@ public class SlopeScene extends GameScreen {
     //Coordinates
     Vector2 tr1, tr2, tr3;
 
+    //For rendering the slope
+    ShapeRenderer shapeRenderer;
+
     public SlopeScene(Main main){
         super(main);
     }
@@ -57,13 +60,15 @@ public class SlopeScene extends GameScreen {
 
         slope.createFixture(triangleFixtureDef);
         slopeShape.dispose();
+
+        shapeRenderer = new ShapeRenderer();
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
 
-        ShapeRenderer shapeRenderer = new ShapeRenderer();
+
         shapeRenderer.setProjectionMatrix(camera.combined);
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -72,4 +77,9 @@ public class SlopeScene extends GameScreen {
         shapeRenderer.end();
     }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        shapeRenderer.dispose();
+    }
 }
