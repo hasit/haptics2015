@@ -4,11 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.sun.prism.Texture;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import uw.haptic2015.Main;
 
@@ -43,7 +44,7 @@ public class LandingScreen implements Screen {
         sub1_txt = new Texture("subtitle1.PNG");
         sub2_txt = new Texture("subtitle2.PNG");
         sub3_txt = new Texture("subtitle3.PNG");
-        shutdown_txt = new Texture("shutdown.PNG"");
+        shutdown_txt = new Texture("shutdown.PNG");
         //img.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         //region = new TextureRegion(img, 0, 0, 800, 420);
@@ -69,16 +70,34 @@ public class LandingScreen implements Screen {
         batch.begin();
 
         //sprite.draw(batch);
-        batch.draw(sprite, 0, 0);
-        batch.draw(title, 0, 0);
-        batch.draw(sub1, 0, 0);
-        batch.draw(sub2, 0, 0);
-        batch.draw(sub3, 0, 0);
-        batch.draw(shutdown, 0, 0);
+        //batch.draw(sprite, 0, 0);
+        batch.draw(title, (screenWidth - 750f), (screenHeight - 100f));
+        batch.draw(sub1, (screenWidth - 1000f), (screenHeight - 500f) );
+        batch.draw(sub2, (screenWidth - 700f), (screenHeight - 500f) );
+        batch.draw(sub3,(screenWidth - 400f), (screenHeight - 500f) );
+        batch.draw(shutdown, (screenWidth - 120f), (screenHeight - 700f));
 
 
         batch.end();
 
+    }
+
+    Vector2 getCoordinates(float x, float y) {
+        Vector3 v3 = camera.unproject(new Vector3(x, y, 0));
+        return new Vector2(v3.x, v3.y);
+    }
+
+    boolean isClicked(int screenX, int screenY) {
+        Vector2 touchPoint = getCoordinates(screenX, screenY);
+        touchPoint.x /= SCALE;
+        touchPoint.y /= SCALE;
+
+        Vector2 relativePos = boxBody.getLocalPoint(new Vector2(touchPoint.x, touchPoint.y));
+
+        if (Math.abs(relativePos.x) <= sprite.getWidth()/2/SCALE && Math.abs(relativePos.y) <= sprite.getHeight()/2/SCALE) {
+            return true;
+        }
+        return false;
     }
 
     @Override
