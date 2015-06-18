@@ -36,6 +36,25 @@ public class SettingScreen implements Screen {
     }
 
     public void create() {
+        batch = new SpriteBatch();
+        skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        stage = new Stage();
+
+        final TextButton applyButton = new TextButton("Back", skin, "default");
+
+        applyButton.setWidth(256f);
+        applyButton.setHeight(128f);
+        applyButton.setPosition(Gdx.graphics.getWidth() / 2 - 128f, Gdx.graphics.getHeight() / 2 - 64f);
+
+        applyButton.addListener(new ClickListener() {
+            @Override
+            public void clicked (InputEvent event, float x, float y) {
+                main.setScreen(main.slopeScene);
+            }
+        });
+
+        stage.addActor(applyButton);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -55,26 +74,7 @@ public class SettingScreen implements Screen {
 
     @Override
     public void show() {
-        batch = new SpriteBatch();
-        skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-        stage = new Stage();
-
-        final TextButton applyButton = new TextButton("Back", skin, "default");
-
-        applyButton.setWidth(256f);
-        applyButton.setHeight(128f);
-        applyButton.setPosition(Gdx.graphics.getWidth() / 2 - 100f, Gdx.graphics.getHeight() / 2 - 10f);
-
-        applyButton.addListener(new ClickListener() {
-            @Override
-            public void clicked (InputEvent event, float x, float y) {
-                //System.out.println("applyButton Pressed");
-                main.setScreen(main.slopeScene);
-            }
-        });
-
-        stage.addActor(applyButton);
-        Gdx.input.setInputProcessor(stage);
+        create();
     }
 
 
