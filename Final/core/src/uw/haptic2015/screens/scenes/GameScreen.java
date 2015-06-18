@@ -93,7 +93,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
         sprite = new Sprite(img);
 
-        world = new World(new Vector2(0, -5f), true);
+        world = new World(new Vector2(0, main.config.getGravity()), true);
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
@@ -112,8 +112,8 @@ public class GameScreen extends InputAdapter implements Screen {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = bodyShape;
-        fixtureDef.friction = 0.2f;
-        fixtureDef.density = 0.1f;
+        fixtureDef.friction = main.config.getFrictionCoefficient();
+        fixtureDef.density = main.config.getDensity();
         fixtureDef.restitution = 0.2f;
 
         boxBody.createFixture(fixtureDef);
@@ -176,15 +176,19 @@ public class GameScreen extends InputAdapter implements Screen {
         Gdx.input.setInputProcessor(this);
     }
 
+    public Vector2 getJointTarget(int screenX, int screenY) {
+        Vector2 newPos = getXY(screenX, screenY);
+        newPos.x /= SCALE;
+        newPos.y /= SCALE;
+
+        return newPos;
+    }
+
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         if (isTouched(screenX, screenY)) {
-            Vector2 newPos = getXY(screenX, screenY);
-            newPos.x /= SCALE;
-            newPos.y /= SCALE;
-
-            jointDef.target.set(newPos);
+            jointDef.target.set(getJointTarget(screenX, screenY));
             joint = (MouseJoint) world.createJoint(jointDef);
         }
 
@@ -205,11 +209,8 @@ public class GameScreen extends InputAdapter implements Screen {
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         if(joint == null) return false;
-        Vector2 newPos = getXY(screenX, screenY);
-        newPos.x /= SCALE;
-        newPos.y /= SCALE;
 
-        joint.setTarget(newPos);
+        joint.setTarget(getJointTarget(screenX, screenY));
 
         main.mtpad.sendFriction(1);
         return true;
