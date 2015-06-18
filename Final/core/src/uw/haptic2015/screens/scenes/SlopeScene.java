@@ -15,7 +15,7 @@ import uw.haptic2015.Main;
  */
 public class SlopeScene extends GameScreen {
     Body slope;
-    float angle = 30; //In degrees. In range [1,45]
+    float angle; //In degrees. In range [1,45]
 
     //Coordinates
     Vector2 tr1, tr2, tr3;
@@ -27,6 +27,8 @@ public class SlopeScene extends GameScreen {
 
     public void create(){
         super.create();
+
+        angle = main.config.getSlopeAngle();
 
         //Slope
         BodyDef slopeDef = new BodyDef();
