@@ -44,12 +44,12 @@ public class SettingScreen implements Screen {
 
         applyButton.setWidth(256f);
         applyButton.setHeight(128f);
-        applyButton.setPosition(Gdx.graphics.getWidth() / 2 - 128f, Gdx.graphics.getHeight() / 2 - 64f);
+        applyButton.setPosition(Gdx.graphics.getWidth() / 2 - 100f, Gdx.graphics.getHeight() / 2 - 10f);
 
         applyButton.addListener(new ClickListener() {
             @Override
             public void clicked (InputEvent event, float x, float y) {
-                main.setScreen(main.slopeScene);
+                main.setScreen(main.activeScreen);
             }
         });
 
@@ -76,7 +76,6 @@ public class SettingScreen implements Screen {
     public void show() {
         create();
     }
-
 
     @Override
     public void hide() {

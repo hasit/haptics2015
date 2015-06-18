@@ -38,7 +38,8 @@ public class GameScreen extends InputAdapter implements Screen {
     World world;
     Body boxBody;
 
-    //Sprite settingsButton;
+    Sprite settingsButton;
+    Sprite homeButton;
 
     Body ground;
     Body leftEdge;
@@ -68,17 +69,17 @@ public class GameScreen extends InputAdapter implements Screen {
         return new Vector2(v3.x, v3.y);
     }
 
+    /**
+     * Are you touching the box?
+     */
     boolean isTouched(int screenX, int screenY) {
         Vector2 touchPoint = getXY(screenX, screenY);
-        touchPoint.x /= SCALE;
-        touchPoint.y /= SCALE;
+        return sprite.getBoundingRectangle().contains(touchPoint);
+    }
 
-        Vector2 relativePos = boxBody.getLocalPoint(new Vector2(touchPoint.x, touchPoint.y));
-
-        if (Math.abs(relativePos.x) <= sprite.getWidth()/2/SCALE && Math.abs(relativePos.y) <= sprite.getHeight()/2/SCALE) {
-            return true;
-        }
-        return false;
+    boolean buttonClicked(int screenX, int screenY, Sprite button) {
+        Vector2 touchPoint = getXY(screenX, screenY);
+        return button.getBoundingRectangle().contains(touchPoint);
     }
 
     public void create(){
@@ -175,7 +176,15 @@ public class GameScreen extends InputAdapter implements Screen {
         jointDef.collideConnected = true;
         jointDef.maxForce = 100;
 
+        //Settings icon
+        settingsButton = new Sprite(new Texture("settings.png"));
+        Vector2 buttonPos = getXY(screenWidth - MARGIN - settingsButton.getWidth(), MARGIN + settingsButton.getHeight());
+        settingsButton.setPosition(buttonPos.x, buttonPos.y);
 
+        //Home icon
+        homeButton = new Sprite(new Texture("home.png"));
+        buttonPos = getXY(MARGIN, MARGIN + homeButton.getHeight());
+        homeButton.setPosition(buttonPos.x, buttonPos.y);
 
         Gdx.input.setInputProcessor(this);
     }
@@ -203,6 +212,13 @@ public class GameScreen extends InputAdapter implements Screen {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         main.mtpad.turnOff();
 
+        if(buttonClicked(screenX, screenY, settingsButton)) {
+            main.setScreen(main.settingScreen);
+        }
+        if(buttonClicked(screenX, screenY, homeButton)) {
+            main.setScreen(main.landingScreen);
+        }
+
         if(joint == null) return false;
 
         world.destroyJoint(joint);
@@ -222,6 +238,8 @@ public class GameScreen extends InputAdapter implements Screen {
 
     public void drawSprites() {
         batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(), sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
+        batch.draw(settingsButton, settingsButton.getX(), settingsButton.getY());
+        batch.draw(homeButton, homeButton.getX(), homeButton.getY());
     }
 
     @Override
