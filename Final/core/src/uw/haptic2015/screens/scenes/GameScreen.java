@@ -93,7 +93,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
         sprite = new Sprite(img);
 
-        world = new World(new Vector2(0, -5f), true);
+        world = new World(new Vector2(0, main.config.getGravity()), true);
 
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
@@ -112,8 +112,8 @@ public class GameScreen extends InputAdapter implements Screen {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = bodyShape;
-        fixtureDef.friction = 0.2f;
-        fixtureDef.density = 0.1f;
+        fixtureDef.friction = main.config.getFrictionCoefficient();
+        fixtureDef.density = main.config.getDensity();
         fixtureDef.restitution = 0.2f;
 
         boxBody.createFixture(fixtureDef);

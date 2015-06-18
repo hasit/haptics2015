@@ -25,6 +25,6 @@ public class Main extends Game {
 		landingScreen = new LandingScreen(this);
 		slopeScene = new SlopeScene(this);
 		//settingScreen = new SettingScreen(this);
-        setScreen(settingScreen);
+        setScreen(slopeScene);
 	}
 }

@@ -7,8 +7,8 @@ public class Config {
     //common var
     public float frictionCoefficient;
     public final String frictionUnit = "";
-    public float mass;
-    public final String massUnit = "kg";
+    public float density;
+    public final String densityUnit = "kg/m^2";
     public float gravity;
     public final String gravityUnit = "m/s^2";
 
@@ -21,8 +21,8 @@ public class Config {
     public final String springUnit = "m/s^2";
 
     public Config() {
-        this.frictionCoefficient = 30;
-        this.mass = 50;
+        this.frictionCoefficient = 0.2f;
+        this.density = 3f;
         this.gravity = -9.81f;
         this.slopeAngle = 30;
         this.springCoefficient = 30;
@@ -36,12 +36,12 @@ public class Config {
         this.frictionCoefficient = frictionCoefficient;
     }
 
-    public float getMass() {
-        return mass;
+    public float getDensity() {
+        return density;
     }
 
-    public void setMass(float mass) {
-        this.mass = mass;
+    public void setDensity(float density) {
+        this.density = density;
     }
 
     public float getGravity() {
@@ -57,6 +57,9 @@ public class Config {
     }
 
     public void setSlopeAngle(float slopeAngle) {
+        if (slopeAngle > 45) slopeAngle = 45;
+        else if (slopeAngle < 1) slopeAngle = 1;
+
         this.slopeAngle = slopeAngle;
     }
 
