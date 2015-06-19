@@ -5,12 +5,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -22,11 +19,8 @@ import uw.haptic2015.Main;
  */
 public class LandingScreen implements Screen {
 
-    SpriteBatch batch;
     float screenWidth, screenHeight;
     Stage stage;
-    Skin skin;
-    ImageButton.ImageButtonStyle title_s;
     Texture title, subtitle1, subtitle2, subtitle3, shutdown;
     TextureRegion title_r, subtitle1_r, subtitle2_r, subtitle3_r, shutdown_r;
     TextureRegionDrawable title_dr, subtitle1_dr, subtitle2_dr, subtitle3_dr, shutdown_dr;
@@ -34,7 +28,8 @@ public class LandingScreen implements Screen {
     BitmapFont default_font;
     Main main;
 
-    public LandingScreen(Main main){
+
+    public LandingScreen(Main main) {
         this.main = main;
     }
 
@@ -42,7 +37,6 @@ public class LandingScreen implements Screen {
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
 
-        batch = new SpriteBatch();
         stage = new Stage();
 
         //Creating Textures
@@ -128,13 +122,10 @@ public class LandingScreen implements Screen {
     }
 
     @Override
-    public void render (float delta) {
+    public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
         stage.draw();
-        batch.end();
     }
 
 
@@ -148,10 +139,10 @@ public class LandingScreen implements Screen {
         create();
     }
 
-
     @Override
     public void hide() {
         // called when current screen changes from this to a different screen
+        this.dispose();
     }
 
 
@@ -167,6 +158,7 @@ public class LandingScreen implements Screen {
 
     @Override
     public void dispose() {
-        // never called automatically
+        stage.dispose();
     }
+
 }
