@@ -16,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
 import uw.haptic2015.Main;
+import uw.haptic2015.screens.scenes.SlopeScene;
+import uw.haptic2015.screens.scenes.SpringScene;
 
 /**
  * Created by hasit on 6/16/15.
@@ -63,6 +65,18 @@ public class SettingScreen implements Screen {
         frictionCoefficientValueLabel = new Label(String.format("%.1f %s", main.config.frictionCoefficient, main.config.frictionUnit), skin);
         frictionCoefficientSlider.setValue(main.config.frictionCoefficient);
 
+        // slope
+        slopeAngleLabel = new Label("Slope", skin, "default");
+        slopeAngleSlider = new Slider(1f, 45f, 1f, false, skin, "default-horizontal");
+        slopeAngleValueLabel = new Label(String.format("%.0f %s", main.config.slopeAngle, main.config.slopeUnit), skin);
+        slopeAngleSlider.setValue(main.config.slopeAngle);
+
+        // slope
+        springCoefficientLabel = new Label("Spring Coeff", skin, "default");
+        springCoefficientSlider = new Slider(5f, 50f, 1f, false, skin, "default-horizontal");
+        springCoefficientValueLabel = new Label(String.format("%.0f %s", main.config.springCoefficient, main.config.springUnit), skin);
+        springCoefficientSlider.setValue(main.config.springCoefficient);
+
         // apply button
         applyButton = new TextButton("Apply", skin, "default");
 
@@ -89,6 +103,19 @@ public class SettingScreen implements Screen {
         table.add(frictionCoefficientSlider);
         table.add(frictionCoefficientValueLabel).width(scrW / 32);
         table.row();
+
+        if(main.activeScreen instanceof SlopeScene) {
+            table.add(slopeAngleLabel).expandY();
+            table.add(slopeAngleSlider);
+            table.add(slopeAngleValueLabel).width(scrW / 32);
+            table.row();
+        } else if(main.activeScreen instanceof SpringScene) {
+            table.add(springCoefficientLabel).expandY();
+            table.add(springCoefficientSlider);
+            table.add(springCoefficientValueLabel).width(scrW / 32);
+            table.row();
+        }
+
         table.add(applyButton).expandY();
         table.add(backButton);
 
@@ -121,12 +148,30 @@ public class SettingScreen implements Screen {
             }
         });
 
+        slopeAngleSlider.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                float val = slopeAngleSlider.getValue();
+                slopeAngleValueLabel.setText(String.format("%.0f %s", val, main.config.slopeUnit));
+            }
+        });
+
+        springCoefficientSlider.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                float val = springCoefficientSlider.getValue();
+                springCoefficientValueLabel.setText(String.format("%.0f %s", val, main.config.springUnit));
+            }
+        });
+
         applyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 main.config.gravity = -gravitySlider.getValue();
                 main.config.density = densitySlider.getValue();
                 main.config.frictionCoefficient = frictionCoefficientSlider.getValue();
+                main.config.slopeAngle = slopeAngleSlider.getValue();
+                main.config.springCoefficient = springCoefficientSlider.getValue();
                 main.setScreen(main.activeScreen);
             }
         });
