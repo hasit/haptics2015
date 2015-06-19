@@ -226,13 +226,25 @@ public class GameScreen extends InputAdapter implements Screen {
         return true;
     }
 
+    public float getResistance() {
+        float res = main.config.getDensity() * (1 + main.config.getFrictionCoefficient());
+        res /= 20;
+
+        //System.out.println("Friction: " + res);
+        return res;
+    }
+
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         if(joint == null) return false;
 
         joint.setTarget(getJointTarget(screenX, screenY));
 
-        main.mtpad.sendFriction(1);
+        if (screenX % 2 == 0 ||  screenY % 2 == 0 )
+            main.mtpad.sendFriction(getResistance());
+        else
+            main.mtpad.turnOff();
+
         return true;
     }
 

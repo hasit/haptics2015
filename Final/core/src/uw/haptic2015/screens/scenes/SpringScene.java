@@ -42,6 +42,23 @@ public class SpringScene extends GameScreen{
         return newPos;
     }
 
+    public float getSpringForce() {
+        float d = boxBody.getWorldCenter().x;
+        float force = - main.config.getSpringCoefficient() * d;
+
+        return force;
+    }
+
+    @Override
+    public float getResistance() {
+        float res = main.config.getDensity() * main.config.getFrictionCoefficient();
+        res += Math.abs(getSpringForce());
+        res /= 2*(main.config.getSpringCoefficient() * screenWidth/2/SCALE);
+        res += 0.5f;
+        //System.out.println("Friction: " + res);
+        return res;
+    }
+
     public float getSpringWidth() {
         float restWidth = Math.abs(springRestPoint.x - springLeft.x);
         return restWidth + boxBody.getWorldCenter().x * SCALE - sprite.getWidth()/2 + 30;
@@ -59,9 +76,6 @@ public class SpringScene extends GameScreen{
     public void render(float delta) {
         super.render(delta);
 
-        float d = boxBody.getWorldCenter().x;
-        float force = - main.config.getSpringCoefficient() * d;
-
-        boxBody.applyForceToCenter(force, 0, true);
+        boxBody.applyForceToCenter(getSpringForce(), 0, true);
     }
 }
