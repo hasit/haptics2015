@@ -37,8 +37,9 @@ public class Main extends Game {
 		slopeScene = new SlopeScene(this);
 
 		//Next line can be removed once landing screen is set to the first screen.
-		activeScreen = slopeScene;
+//		activeScreen = slopeScene;
 
-        setScreen(settingScreen);
+        setScreen(slopeScene);
+
 	}
 }

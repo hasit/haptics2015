@@ -8,6 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import uw.haptic2015.Main;
 import uw.haptic2015.screens.scenes.SlopeScene;
@@ -17,33 +22,46 @@ import uw.haptic2015.screens.scenes.SlopeScene;
  */
 public class LandingScreen implements Screen {
 
-    SpriteBatch batch;
-    Texture img;
     Main main;
 
-    public LandingScreen(Main main){
+    //private SpriteBatch batch;
+    private Skin skin;
+    private Stage stage;
+
+    public LandingScreen(Main main) {
         this.main = main;
-        create();
     }
 
-    public void create(){
-        batch = new SpriteBatch();
-        //img = new Texture("badlogic.jpg");
+    public void create() {
+        //batch = new SpriteBatch();
+        skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        stage = new Stage();
+
+        final TextButton applyButton = new TextButton("Back", skin, "default");
+
+        applyButton.setWidth(256f);
+        applyButton.setHeight(128f);
+        applyButton.setPosition(Gdx.graphics.getWidth() / 2 - 128f, Gdx.graphics.getHeight() / 2 - 64f);
+
+        applyButton.addListener(new ClickListener() {
+            @Override
+            public void clicked (InputEvent event, float x, float y) {
+                main.setScreen(main.activeScreen);
+            }
+        });
+
+        stage.addActor(applyButton);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
-    public void render (float delta) {
+    public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        /*
-        batch.begin();
-        batch.draw(img, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-        batch.end();
 
-        if(Gdx.input.isTouched()){
-            main.setScreen(main.slopeScene);
-        }
-        */
+        //batch.begin();
+        stage.draw();
+        //batch.end();
     }
 
     @Override
@@ -53,13 +71,13 @@ public class LandingScreen implements Screen {
 
     @Override
     public void show() {
-        // called when this screen is set as the screen with game.setScreen();
+        create();
     }
-
 
     @Override
     public void hide() {
         // called when current screen changes from this to a different screen
+        this.dispose();
     }
 
 
@@ -75,6 +93,7 @@ public class LandingScreen implements Screen {
 
     @Override
     public void dispose() {
-        // never called automatically
+        //batch.dispose();
+        skin.dispose();
     }
 }
