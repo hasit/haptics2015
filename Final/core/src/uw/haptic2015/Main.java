@@ -1,14 +1,13 @@
 package uw.haptic2015;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 
-import uw.haptic2015.screens.scenes.SpringScene;
-import uw.tpad.TPad;
 import uw.haptic2015.screens.LandingScreen;
 import uw.haptic2015.screens.SettingScreen;
 import uw.haptic2015.screens.scenes.GameScreen;
 import uw.haptic2015.screens.scenes.SlopeScene;
+import uw.haptic2015.screens.scenes.SpringScene;
+import uw.tpad.TPad;
 
 public class Main extends Game {
 	public GameScreen slopeScene;
@@ -39,7 +38,7 @@ public class Main extends Game {
 		//Next line can be removed once landing screen is set to the first screen.
 //		activeScreen = slopeScene;
 
-        setScreen(slopeScene);
+		setScreen(landingScreen);
 
 	}
 }
