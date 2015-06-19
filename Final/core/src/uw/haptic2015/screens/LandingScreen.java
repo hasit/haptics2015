@@ -1,13 +1,8 @@
 package uw.haptic2015.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -15,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import uw.haptic2015.Main;
-import uw.haptic2015.screens.scenes.SlopeScene;
 
 /**
  * Created by jerrychen on 6/13/15.
@@ -24,7 +18,6 @@ public class LandingScreen implements Screen {
 
     Main main;
 
-    //private SpriteBatch batch;
     private Skin skin;
     private Stage stage;
 
@@ -33,7 +26,6 @@ public class LandingScreen implements Screen {
     }
 
     public void create() {
-        //batch = new SpriteBatch();
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         stage = new Stage();
 
@@ -59,13 +51,12 @@ public class LandingScreen implements Screen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //batch.begin();
         stage.draw();
-        //batch.end();
     }
 
     @Override
     public void resize(int width, int height) {
+
     }
 
 
@@ -93,7 +84,6 @@ public class LandingScreen implements Screen {
 
     @Override
     public void dispose() {
-        //batch.dispose();
         skin.dispose();
     }
 }

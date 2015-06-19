@@ -264,6 +264,7 @@ public class GameScreen extends InputAdapter implements Screen {
     }
     @Override
     public void resize(int width, int height) {
+
     }
 
     @Override

@@ -3,12 +3,13 @@ package uw.haptic2015;
 /**
  * Created by jerrychen on 6/17/15.
  */
+
 public class Config {
     //common var
     public float frictionCoefficient;
     public final String frictionUnit = "";
     public float density;
-    public final String densityUnit = "kg/m^2";
+    public final String densityUnit = "kg";
     public float gravity;
     public final String gravityUnit = "m/s^2";
 
@@ -23,7 +24,7 @@ public class Config {
     public Config() {
         this.frictionCoefficient = 0.2f;
         this.density = 3f;
-        this.gravity = -9.81f;
+        this.gravity = -9.8f;
         this.slopeAngle = 30;
         this.springCoefficient = 30;
     }
