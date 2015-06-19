@@ -21,12 +21,13 @@ public class LandingScreen implements Screen {
 
     float screenWidth, screenHeight;
     Stage stage;
-    Texture title, subtitle1, subtitle2, subtitle3, shutdown;
-    TextureRegion title_r, subtitle1_r, subtitle2_r, subtitle3_r, shutdown_r;
-    TextureRegionDrawable title_dr, subtitle1_dr, subtitle2_dr, subtitle3_dr, shutdown_dr;
+    Texture title, subtitle1, subtitle1_down, subtitle2, subtitle2_down, subtitle3, shutdown;
+    TextureRegion title_r, subtitle1_r, subtitle1_down_r, subtitle2_r, subtitle2_down_r, subtitle3_r, shutdown_r;
+    TextureRegionDrawable title_dr, subtitle1_dr, subtitle1_down_dr, subtitle2_dr, subtitle2_down_dr, subtitle3_dr, shutdown_dr;
     TextButton.TextButtonStyle title_style, subtitle1_style, subtitle2_style, subtitle3_style, shutdown_style;
     BitmapFont default_font;
     Main main;
+
 
     public LandingScreen(Main main) {
         this.main = main;
@@ -41,29 +42,35 @@ public class LandingScreen implements Screen {
         //Creating Textures
         title = new Texture("title.png");
         subtitle1 = new Texture("subtitle1.png");
+        subtitle1_down = new Texture("subtitle1_down.png");
         subtitle2 = new Texture("subtitle2.png");
+        subtitle2_down = new Texture("subtitle2_down.png");
         subtitle3 = new Texture("subtitle3.png");
         shutdown = new Texture("shutdown.png");
 
         //Creating TextureRegions
         title_r = new TextureRegion(title);
         subtitle1_r = new TextureRegion(subtitle1);
+        subtitle1_down_r = new TextureRegion(subtitle1_down);
         subtitle2_r = new TextureRegion(subtitle2);
+        subtitle2_down_r = new TextureRegion(subtitle2_down);
         subtitle3_r = new TextureRegion(subtitle3);
         shutdown_r = new TextureRegion(shutdown);
 
         //Creating TextureRegionDrawables
         title_dr = new TextureRegionDrawable(title_r);
         subtitle1_dr = new TextureRegionDrawable(subtitle1_r);
+        subtitle1_down_dr = new TextureRegionDrawable(subtitle1_down_r);
         subtitle2_dr = new TextureRegionDrawable(subtitle2_r);
+        subtitle2_down_dr = new TextureRegionDrawable(subtitle2_down_r);
         subtitle3_dr = new TextureRegionDrawable(subtitle3_r);
         shutdown_dr = new TextureRegionDrawable(shutdown_r);
 
         //Creating TextButtonStyles
         default_font = new BitmapFont();
         title_style = new TextButton.TextButtonStyle(title_dr, title_dr, title_dr, default_font);
-        subtitle1_style = new TextButton.TextButtonStyle(subtitle1_dr, subtitle1_dr, subtitle1_dr, default_font);
-        subtitle2_style = new TextButton.TextButtonStyle(subtitle2_dr, subtitle2_dr, subtitle2_dr, default_font);
+        subtitle1_style = new TextButton.TextButtonStyle(subtitle1_dr, subtitle1_down_dr, subtitle1_dr, default_font);
+        subtitle2_style = new TextButton.TextButtonStyle(subtitle2_dr, subtitle2_down_dr, subtitle2_dr, default_font);
         subtitle3_style = new TextButton.TextButtonStyle(subtitle3_dr, subtitle3_dr, subtitle3_dr, default_font);
         shutdown_style = new TextButton.TextButtonStyle(shutdown_dr, shutdown_dr, shutdown_dr, default_font);
 
@@ -124,14 +131,14 @@ public class LandingScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         stage.draw();
     }
 
+
     @Override
     public void resize(int width, int height) {
-
     }
+
 
     @Override
     public void show() {
@@ -144,16 +151,20 @@ public class LandingScreen implements Screen {
         this.dispose();
     }
 
+
     @Override
     public void pause() {
     }
+
 
     @Override
     public void resume() {
     }
 
+
     @Override
     public void dispose() {
         stage.dispose();
     }
+
 }

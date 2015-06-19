@@ -71,7 +71,7 @@ public class SettingScreen implements Screen {
         slopeAngleValueLabel = new Label(String.format("%.0f %s", main.config.slopeAngle, main.config.slopeUnit), skin);
         slopeAngleSlider.setValue(main.config.slopeAngle);
 
-        // slope
+        // spring
         springCoefficientLabel = new Label("Spring Coeff", skin, "default");
         springCoefficientSlider = new Slider(5f, 50f, 1f, false, skin, "default-horizontal");
         springCoefficientValueLabel = new Label(String.format("%.0f %s", main.config.springCoefficient, main.config.springUnit), skin);
