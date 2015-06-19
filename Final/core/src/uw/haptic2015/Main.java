@@ -35,11 +35,11 @@ public class Main extends Game {
 
 		springScene = new SpringScene(this);
 		slopeScene = new SlopeScene(this);
-		
-		//Next line can be removed once landing screen is set to the first screen.
-		activeScreen = slopeScene;
 
-        setScreen(settingScreen);
+		//Next line can be removed once landing screen is set to the first screen.
+//		activeScreen = slopeScene;
+
+        setScreen(slopeScene);
 
 	}
 }
