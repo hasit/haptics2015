@@ -13,6 +13,7 @@ import uw.haptic2015.Main;
 /**
  * Created by jerrychen on 6/13/15.
  */
+
 public class SlopeScene extends GameScreen {
     Body slope;
     float angle; //In degrees. In range [1,45]
@@ -26,7 +27,6 @@ public class SlopeScene extends GameScreen {
     public SlopeScene(Main main){
         super(main);
     }
-
 
     public void create(){
         super.create();
@@ -47,7 +47,6 @@ public class SlopeScene extends GameScreen {
         //Compute tr3 with angle
         float d = (float)((tr2.x - tr1.x)*Math.tan(angle * Math.PI / 180));
         tr3 = new Vector2(tr2.x, tr2.y + d);
-        //tr3 = getXY(screenWidth-MARGIN, screenHeight/2); tr3.x /= SCALE; tr3.y /= SCALE;
 
         Vector2[] triangle = {tr1, tr2, tr3};
         slopeShape.set(triangle);
@@ -67,7 +66,6 @@ public class SlopeScene extends GameScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-
 
         shapeRenderer.setProjectionMatrix(camera.combined);
 

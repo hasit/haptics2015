@@ -55,7 +55,6 @@ public class SpringScene extends GameScreen{
         res += Math.abs(getSpringForce());
         res /= 2*(main.config.getSpringCoefficient() * screenWidth/2/SCALE);
         res += 0.5f;
-        //System.out.println("Friction: " + res);
         return res;
     }
 

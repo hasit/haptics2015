@@ -29,6 +29,7 @@ import uw.haptic2015.Main;
 /**
  * Created by jerrychen on 6/13/15.
  */
+
 public class GameScreen extends InputAdapter implements Screen {
 
     Main main;
@@ -70,7 +71,7 @@ public class GameScreen extends InputAdapter implements Screen {
     }
 
     /**
-     * Are you touching the box?
+     * Are you touching the box? Are you really?
      */
     boolean isTouched(int screenX, int screenY) {
         Vector2 touchPoint = getXY(screenX, screenY);
@@ -230,7 +231,6 @@ public class GameScreen extends InputAdapter implements Screen {
         float res = main.config.getDensity() * (1 + main.config.getFrictionCoefficient());
         res /= 80;
         res += 0.5f;
-        //System.out.println("Friction: " + res);
         return res;
     }
 

@@ -2,9 +2,7 @@ package uw.haptic2015.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,10 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import uw.haptic2015.Main;
 
@@ -75,17 +69,6 @@ public class SettingScreen implements Screen {
         // back button
         backButton = new TextButton("Back", skin, "default");
 
-        //applyButton.setWidth(256f);
-        //applyButton.setHeight(128f);
-        //applyButton.setPosition(Gdx.graphics.getWidth() / 2 - (256f + 128f), Gdx.graphics.getHeight() / 4 - 128f);
-
-        //backButton.setWidth(256f);
-        //backButton.setHeight(128f);
-        //backButton.setPosition(Gdx.graphics.getWidth() / 2 + (256f + 128f), Gdx.graphics.getHeight() / 4 - 128f);
-
-        //stage.addActor(applyButton);
-        //stage.addActor(backButton);
-
         // -----
         // table
         // -----
@@ -94,15 +77,15 @@ public class SettingScreen implements Screen {
 
         float scrW = Gdx.graphics.getWidth();
         float scrH = Gdx.graphics.getHeight();
-        table.add(gravityLabel).expandY();//.size(scrW/3, scrH/3);
+        table.add(gravityLabel).expandY();
         table.add(gravitySlider);
         table.add(gravityValueLabel).width(scrW / 32);
         table.row();
-        table.add(densityLabel).expandY();//.size(scrW/3, scrH/3);
+        table.add(densityLabel).expandY();
         table.add(densitySlider);
         table.add(densityValueLabel).width(scrW / 32);
         table.row();
-        table.add(frictionCoefficientLabel).expandY();//.size(scrW/3, scrH/3);
+        table.add(frictionCoefficientLabel).expandY();
         table.add(frictionCoefficientSlider);
         table.add(frictionCoefficientValueLabel).width(scrW / 32);
         table.row();
@@ -119,7 +102,6 @@ public class SettingScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 float val = gravitySlider.getValue();
                 gravityValueLabel.setText(String.format("%.1f %s", val, main.config.gravityUnit));
-                //gravityValueLabel.invalidate();
             }
         });
 
@@ -146,7 +128,6 @@ public class SettingScreen implements Screen {
                 main.config.density = densitySlider.getValue();
                 main.config.frictionCoefficient = frictionCoefficientSlider.getValue();
                 main.setScreen(main.activeScreen);
-
             }
         });
 
@@ -170,10 +151,7 @@ public class SettingScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        //viewport.update(width,height);
-        //stage.getViewport().update(width, height, false);
     }
-
 
     @Override
     public void show() {
@@ -186,16 +164,13 @@ public class SettingScreen implements Screen {
         this.dispose();
     }
 
-
     @Override
     public void pause() {
     }
 
-
     @Override
     public void resume() {
     }
-
 
     @Override
     public void dispose() {
