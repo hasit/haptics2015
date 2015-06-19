@@ -1,0 +1,40 @@
+
+landing_theme.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shutdown
+  rotate: false
+  xy: 2, 630
+  size: 93, 89
+  orig: 93, 89
+  offset: 0, 0
+  index: -1
+subtitle1
+  rotate: false
+  xy: 67, 211
+  size: 181, 206
+  orig: 181, 206
+  offset: 0, 0
+  index: -1
+subtitle2
+  rotate: false
+  xy: 67, 419
+  size: 175, 209
+  orig: 175, 209
+  offset: 0, 0
+  index: -1
+subtitle3
+  rotate: false
+  xy: 2, 2
+  size: 212, 207
+  orig: 212, 207
+  offset: 0, 0
+  index: -1
+title
+  rotate: true
+  xy: 2, 211
+  size: 333, 63
+  orig: 333, 63
+  offset: 0, 0
+  index: -1

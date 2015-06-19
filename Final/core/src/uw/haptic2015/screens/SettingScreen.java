@@ -118,17 +118,15 @@ public class SettingScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 float val = gravitySlider.getValue();
-                main.config.gravity = -val;
                 gravityValueLabel.setText(String.format("%.1f %s", val, main.config.gravityUnit));
                 //gravityValueLabel.invalidate();
             }
         });
 
-        densitySlider.addListener(new ChangeListener(){
+        densitySlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 float val = densitySlider.getValue();
-                main.config.density = val;
                 densityValueLabel.setText(String.format("%.0f %s", val, main.config.densityUnit));
             }
         });
@@ -137,7 +135,6 @@ public class SettingScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 float val = frictionCoefficientSlider.getValue();
-                main.config.frictionCoefficient = val;
                 frictionCoefficientValueLabel.setText(String.format("%.1f %s", val, main.config.frictionUnit));
             }
         });
@@ -145,7 +142,11 @@ public class SettingScreen implements Screen {
         applyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                main.setScreen(main.landingScreen);
+                main.config.gravity = -gravitySlider.getValue();
+                main.config.density = densitySlider.getValue();
+                main.config.frictionCoefficient = frictionCoefficientSlider.getValue();
+                main.setScreen(main.activeScreen);
+
             }
         });
 
