@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -21,13 +22,14 @@ public class LandingScreen implements Screen {
 
     float screenWidth, screenHeight;
     Stage stage;
-    Texture title, subtitle1, subtitle1_down, subtitle2, subtitle2_down, subtitle3, shutdown;
-    TextureRegion title_r, subtitle1_r, subtitle1_down_r, subtitle2_r, subtitle2_down_r, subtitle3_r, shutdown_r;
-    TextureRegionDrawable title_dr, subtitle1_dr, subtitle1_down_dr, subtitle2_dr, subtitle2_down_dr, subtitle3_dr, shutdown_dr;
-    TextButton.TextButtonStyle title_style, subtitle1_style, subtitle2_style, subtitle3_style, shutdown_style;
+    Texture title, subtitle1, subtitle1_down, subtitle2, subtitle2_down, subtitle3;;
+    TextureRegion title_r, subtitle1_r, subtitle1_down_r, subtitle2_r, subtitle2_down_r, subtitle3_r;
+    TextureRegionDrawable title_dr, subtitle1_dr, subtitle1_down_dr, subtitle2_dr, subtitle2_down_dr, subtitle3_dr;
+    TextButton.TextButtonStyle title_style, subtitle1_style, subtitle2_style, subtitle3_style;
     BitmapFont default_font;
     Main main;
 
+    Texture background;
 
     public LandingScreen(Main main) {
         this.main = main;
@@ -46,7 +48,6 @@ public class LandingScreen implements Screen {
         subtitle2 = new Texture("subtitle2.png");
         subtitle2_down = new Texture("subtitle2_down.png");
         subtitle3 = new Texture("subtitle3.png");
-        shutdown = new Texture("shutdown.png");
 
         //Creating TextureRegions
         title_r = new TextureRegion(title);
@@ -55,7 +56,6 @@ public class LandingScreen implements Screen {
         subtitle2_r = new TextureRegion(subtitle2);
         subtitle2_down_r = new TextureRegion(subtitle2_down);
         subtitle3_r = new TextureRegion(subtitle3);
-        shutdown_r = new TextureRegion(shutdown);
 
         //Creating TextureRegionDrawables
         title_dr = new TextureRegionDrawable(title_r);
@@ -64,7 +64,6 @@ public class LandingScreen implements Screen {
         subtitle2_dr = new TextureRegionDrawable(subtitle2_r);
         subtitle2_down_dr = new TextureRegionDrawable(subtitle2_down_r);
         subtitle3_dr = new TextureRegionDrawable(subtitle3_r);
-        shutdown_dr = new TextureRegionDrawable(shutdown_r);
 
         //Creating TextButtonStyles
         default_font = new BitmapFont();
@@ -72,7 +71,6 @@ public class LandingScreen implements Screen {
         subtitle1_style = new TextButton.TextButtonStyle(subtitle1_dr, subtitle1_down_dr, subtitle1_dr, default_font);
         subtitle2_style = new TextButton.TextButtonStyle(subtitle2_dr, subtitle2_down_dr, subtitle2_dr, default_font);
         subtitle3_style = new TextButton.TextButtonStyle(subtitle3_dr, subtitle3_dr, subtitle3_dr, default_font);
-        shutdown_style = new TextButton.TextButtonStyle(shutdown_dr, shutdown_dr, shutdown_dr, default_font);
 
         //Creating Title TextButton
         TextButton title_b = new TextButton(" ", title_style);
@@ -88,11 +86,7 @@ public class LandingScreen implements Screen {
 
         //Creating Subtitle3 TextButton
         TextButton subtitle3_b = new TextButton(" ", subtitle3_style);
-        subtitle3_b.setPosition((screenWidth - 400f), (screenHeight - 500f) );
-
-        //Creating Shutdown TextButton
-        TextButton shutdown_b = new TextButton(" ", shutdown_style);
-        shutdown_b.setPosition((screenWidth - 120f), (screenHeight - 700f));
+        subtitle3_b.setPosition((screenWidth - 400f), (screenHeight - 500f));
 
         subtitle1_b.addListener(new ClickListener() {
             @Override
@@ -103,28 +97,23 @@ public class LandingScreen implements Screen {
 
         subtitle2_b.addListener(new ClickListener() {
             @Override
-            public void clicked (InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) {
                 main.setScreen(main.springScene);
             }
         });
 
-        shutdown_b.addListener(new ClickListener() {
-            @Override
-            public void clicked (InputEvent event, float x, float y) {
-                dispose();
-                System.exit(0);
-            }
-        });
+        //Background
+        Image background = new Image(new Texture("grey_grid_landscape.png"));
+        background.setFillParent(true);
+        stage.addActor(background);
 
         //Add to Stage
         stage.addActor(title_b);
         stage.addActor(subtitle1_b);
         stage.addActor(subtitle2_b);
         stage.addActor(subtitle3_b);
-        stage.addActor(shutdown_b);
 
         Gdx.input.setInputProcessor(stage);
-
     }
 
     @Override
@@ -134,11 +123,9 @@ public class LandingScreen implements Screen {
         stage.draw();
     }
 
-
     @Override
     public void resize(int width, int height) {
     }
-
 
     @Override
     public void show() {
@@ -151,20 +138,16 @@ public class LandingScreen implements Screen {
         this.dispose();
     }
 
-
     @Override
     public void pause() {
     }
-
 
     @Override
     public void resume() {
     }
 
-
     @Override
     public void dispose() {
         stage.dispose();
     }
-
 }

@@ -64,13 +64,19 @@ public class SlopeScene extends GameScreen {
     }
 
     @Override
+    public void drawConfigValues() {
+        super.drawConfigValues();
+        font.draw(batch, String.format("Slope: %.0f %s", main.config.slopeAngle, main.config.slopeUnit), -screenWidth/8, 2*screenHeight/12);
+    }
+
+    @Override
     public void render(float delta) {
         super.render(delta);
 
         shapeRenderer.setProjectionMatrix(camera.combined);
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.setColor(Color.DARK_GRAY);
         shapeRenderer.triangle(tr1.x*SCALE, tr1.y*SCALE, tr2.x*SCALE, tr2.y*SCALE, tr3.x*SCALE, tr3.y*SCALE);
         shapeRenderer.end();
     }

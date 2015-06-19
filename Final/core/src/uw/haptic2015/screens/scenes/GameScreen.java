@@ -9,8 +9,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -34,7 +37,10 @@ public class GameScreen extends InputAdapter implements Screen {
 
     Main main;
     SpriteBatch batch;
+    BitmapFont font;
     Texture img;
+
+    Texture background;
 
     World world;
     Body boxBody;
@@ -86,11 +92,13 @@ public class GameScreen extends InputAdapter implements Screen {
     public void create(){
         batch = new SpriteBatch();
         Pixmap pmap = new Pixmap(128,128,Pixmap.Format.RGBA8888);
-        pmap.setColor(Color.BLUE);
+        pmap.setColor(0.746f, 0.246f, 0.246f, 1);
         pmap.fillRectangle(0, 0, 128, 128);
         img = new Texture(pmap);
         img.draw(pmap, 0, 0);
         img.bind();
+
+        background = new Texture("grey_grid_landscape.png");
 
         sprite = new Sprite(img);
 
@@ -180,12 +188,24 @@ public class GameScreen extends InputAdapter implements Screen {
         //Settings icon
         settingsButton = new Sprite(new Texture("settings.png"));
         Vector2 buttonPos = getXY(screenWidth - MARGIN - settingsButton.getWidth(), MARGIN + settingsButton.getHeight());
+
+        //settingsButton = new Sprite(new Texture("settings2.png"));
+        //Vector2 buttonPos = getXY(MARGIN, screenHeight/2 + settingsButton.getHeight()/2);
+
         settingsButton.setPosition(buttonPos.x, buttonPos.y);
 
         //Home icon
         homeButton = new Sprite(new Texture("home.png"));
         buttonPos = getXY(MARGIN, MARGIN + homeButton.getHeight());
         homeButton.setPosition(buttonPos.x, buttonPos.y);
+
+        //Font
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.size = 24;
+        font = fontGenerator.generateFont(parameter);
+        font.setColor(Color.RED);
+        fontGenerator.dispose();
 
         Gdx.input.setInputProcessor(this);
     }
@@ -248,6 +268,12 @@ public class GameScreen extends InputAdapter implements Screen {
         return true;
     }
 
+    public void drawConfigValues() {
+        font.draw(batch, String.format("Gravity: %.1f %s", main.config.gravity, main.config.gravityUnit), -screenWidth/8, 5*screenHeight/12);
+        font.draw(batch, String.format("Mass: %.0f %s", main.config.density, main.config.densityUnit), -screenWidth/8, 4*screenHeight/12);
+        font.draw(batch, String.format("Friction: %.1f %s", main.config.frictionCoefficient, main.config.frictionUnit), -screenWidth/8, 3*screenHeight/12);
+    }
+
     public void drawSprites() {
         batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(), sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
         batch.draw(settingsButton, settingsButton.getX(), settingsButton.getY());
@@ -269,7 +295,9 @@ public class GameScreen extends InputAdapter implements Screen {
         sprite.setRotation((float) Math.toDegrees(boxBody.getAngle()));
 
         batch.begin();
+        batch.draw(background, -screenWidth / 2, -screenHeight / 2, screenWidth, screenHeight);
         drawSprites();
+        drawConfigValues();
         batch.end();
 
         debugRenderer.render(world, debugMatrix);

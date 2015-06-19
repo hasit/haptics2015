@@ -19,7 +19,7 @@ public class Config {
 
     //spring scene
     public float springCoefficient;
-    public final String springUnit = "m/s^2";
+    public final String springUnit = "kg/s^2";
 
     public Config() {
         this.frictionCoefficient = 0.2f;

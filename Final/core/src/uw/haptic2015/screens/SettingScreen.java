@@ -3,9 +3,11 @@ package uw.haptic2015.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -82,6 +84,11 @@ public class SettingScreen implements Screen {
 
         // back button
         backButton = new TextButton("Back", skin, "default");
+
+        //Background
+        Image background = new Image(new Texture("grey_grid_landscape.png"));
+        background.setFillParent(true);
+        stage.addActor(background);
 
         // -----
         // table

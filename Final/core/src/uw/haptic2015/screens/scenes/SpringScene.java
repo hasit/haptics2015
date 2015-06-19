@@ -72,6 +72,12 @@ public class SpringScene extends GameScreen{
     }
 
     @Override
+    public void drawConfigValues() {
+        super.drawConfigValues();
+        font.draw(batch, String.format("Spring Coeff: %.0f %s", main.config.springCoefficient, main.config.springUnit), -screenWidth/8, 2*screenHeight/12);
+    }
+
+    @Override
     public void render(float delta) {
         super.render(delta);
 
