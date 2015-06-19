@@ -28,7 +28,7 @@ public class Main extends Game {
 		springScene = new SpringScene(this);
 		slopeScene = new SlopeScene(this);
 
-		//settingScreen = new SettingScreen(this);
+		settingScreen = new SettingScreen(this);
 
         //setScreen(slopeScene);
 		setScreen(landingScreen);

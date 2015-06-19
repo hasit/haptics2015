@@ -3,13 +3,17 @@ package uw.haptic2015.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import uw.haptic2015.Main;
 
@@ -18,46 +22,109 @@ import uw.haptic2015.Main;
  */
 public class LandingScreen implements Screen {
 
-    OrthographicCamera camera;
     SpriteBatch batch;
-    Sprite sprite, title, sub1, sub2, sub3, shutdown;
-    Texture img, title_txt, sub1_txt, sub2_txt, sub3_txt, shutdown_txt;
-    TextureRegion region;
     float screenWidth, screenHeight;
+    Stage stage;
+    Skin skin;
+    ImageButton.ImageButtonStyle title_s;
+    Texture title, subtitle1, subtitle2, subtitle3, shutdown;
+    TextureRegion title_r, subtitle1_r, subtitle2_r, subtitle3_r, shutdown_r;
+    TextureRegionDrawable title_dr, subtitle1_dr, subtitle2_dr, subtitle3_dr, shutdown_dr;
+    TextButton.TextButtonStyle title_style, subtitle1_style, subtitle2_style, subtitle3_style, shutdown_style;
+    BitmapFont default_font;
     Main main;
 
     public LandingScreen(Main main){
         this.main = main;
-        create();
     }
 
     public void create(){
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, screenWidth, screenHeight);
 
         batch = new SpriteBatch();
+        stage = new Stage();
 
-        img = new Texture("grey_grid_landscape.png");
-        title_txt = new Texture("title.PNG");
-        sub1_txt = new Texture("subtitle1.PNG");
-        sub2_txt = new Texture("subtitle2.PNG");
-        sub3_txt = new Texture("subtitle3.PNG");
-        shutdown_txt = new Texture("shutdown.PNG");
-        //img.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        //Creating Textures
+        title = new Texture("title.png");
+        subtitle1 = new Texture("subtitle1.png");
+        subtitle2 = new Texture("subtitle2.png");
+        subtitle3 = new Texture("subtitle3.png");
+        shutdown = new Texture("shutdown.png");
 
-        //region = new TextureRegion(img, 0, 0, 800, 420);
+        //Creating TextureRegions
+        title_r = new TextureRegion(title);
+        subtitle1_r = new TextureRegion(subtitle1);
+        subtitle2_r = new TextureRegion(subtitle2);
+        subtitle3_r = new TextureRegion(subtitle3);
+        shutdown_r = new TextureRegion(shutdown);
 
-        //sprite = new Sprite(region);
-        sprite = new Sprite(img);
-        title = new Sprite(title_txt);
-        sub1 = new Sprite(sub1_txt);
-        sub2 = new Sprite(sub2_txt);
-        sub3 = new Sprite(sub3_txt);
-        shutdown = new Sprite(shutdown_txt);
-        //sprite.setSize(1f, 1f * sprite.getHeight()/sprite.getWidth());
-        //sprite.scale(1f);
+        //Creating TextureRegionDrawables
+        title_dr = new TextureRegionDrawable(title_r);
+        subtitle1_dr = new TextureRegionDrawable(subtitle1_r);
+        subtitle2_dr = new TextureRegionDrawable(subtitle2_r);
+        subtitle3_dr = new TextureRegionDrawable(subtitle3_r);
+        shutdown_dr = new TextureRegionDrawable(shutdown_r);
+
+        //Creating TextButtonStyles
+        default_font = new BitmapFont();
+        title_style = new TextButton.TextButtonStyle(title_dr, title_dr, title_dr, default_font);
+        subtitle1_style = new TextButton.TextButtonStyle(subtitle1_dr, subtitle1_dr, subtitle1_dr, default_font);
+        subtitle2_style = new TextButton.TextButtonStyle(subtitle2_dr, subtitle2_dr, subtitle2_dr, default_font);
+        subtitle3_style = new TextButton.TextButtonStyle(subtitle3_dr, subtitle3_dr, subtitle3_dr, default_font);
+        shutdown_style = new TextButton.TextButtonStyle(shutdown_dr, shutdown_dr, shutdown_dr, default_font);
+
+        //Creating Title TextButton
+        TextButton title_b = new TextButton(" ", title_style);
+        title_b.setPosition((screenWidth - 750f), (screenHeight - 100f));
+
+        //Creating Subtitle1 TextButton
+        TextButton subtitle1_b = new TextButton(" ", subtitle1_style);
+        subtitle1_b.setPosition((screenWidth - 1000f), (screenHeight - 500f) );
+
+        //Creating Subtitle2 TextButton
+        TextButton subtitle2_b = new TextButton(" ", subtitle2_style);
+        subtitle2_b.setPosition((screenWidth - 700f), (screenHeight - 500f) );
+
+        //Creating Subtitle3 TextButton
+        TextButton subtitle3_b = new TextButton(" ", subtitle3_style);
+        subtitle3_b.setPosition((screenWidth - 400f), (screenHeight - 500f) );
+
+        //Creating Shutdown TextButton
+        TextButton shutdown_b = new TextButton(" ", shutdown_style);
+        shutdown_b.setPosition((screenWidth - 120f), (screenHeight - 700f));
+
+        subtitle1_b.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                main.setScreen(main.slopeScene);
+            }
+        });
+
+        subtitle2_b.addListener(new ClickListener() {
+            @Override
+            public void clicked (InputEvent event, float x, float y) {
+                main.setScreen(main.springScene);
+            }
+        });
+
+        shutdown_b.addListener(new ClickListener() {
+            @Override
+            public void clicked (InputEvent event, float x, float y) {
+                dispose();
+                System.exit(0);
+            }
+        });
+
+        //Add to Stage
+        stage.addActor(title_b);
+        stage.addActor(subtitle1_b);
+        stage.addActor(subtitle2_b);
+        stage.addActor(subtitle3_b);
+        stage.addActor(shutdown_b);
+
+        Gdx.input.setInputProcessor(stage);
+
     }
 
     @Override
@@ -65,40 +132,11 @@ public class LandingScreen implements Screen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
         batch.begin();
-
-        //sprite.draw(batch);
-        //batch.draw(sprite, 0, 0);
-        batch.draw(title, (screenWidth - 750f), (screenHeight - 100f));
-        batch.draw(sub1, (screenWidth - 1000f), (screenHeight - 500f) );
-        batch.draw(sub2, (screenWidth - 700f), (screenHeight - 500f) );
-        batch.draw(sub3,(screenWidth - 400f), (screenHeight - 500f) );
-        batch.draw(shutdown, (screenWidth - 120f), (screenHeight - 700f));
-
-
+        stage.draw();
         batch.end();
-
     }
 
-    Vector2 getCoordinates(float x, float y) {
-        Vector3 v3 = camera.unproject(new Vector3(x, y, 0));
-        return new Vector2(v3.x, v3.y);
-    }
-
-    boolean isClicked(int screenX, int screenY) {
-        Vector2 touchPoint = getCoordinates(screenX, screenY);
-        touchPoint.x /= SCALE;
-        touchPoint.y /= SCALE;
-
-        Vector2 relativePos = boxBody.getLocalPoint(new Vector2(touchPoint.x, touchPoint.y));
-
-        if (Math.abs(relativePos.x) <= sprite.getWidth()/2/SCALE && Math.abs(relativePos.y) <= sprite.getHeight()/2/SCALE) {
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public void resize(int width, int height) {
@@ -107,7 +145,7 @@ public class LandingScreen implements Screen {
 
     @Override
     public void show() {
-        // called when this screen is set as the screen with game.setScreen();
+        create();
     }
 
 
