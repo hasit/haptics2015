@@ -260,7 +260,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
         joint.setTarget(getJointTarget(screenX, screenY));
 
-        if (screenX % 2 == 0 ||  screenY % 2 == 0 )
+        if (screenX % 2 == 0)
             main.mtpad.sendFriction(getResistance());
         else
             main.mtpad.turnOff();
