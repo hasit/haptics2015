@@ -67,6 +67,8 @@ public class GameScreen extends InputAdapter implements Screen {
     MouseJointDef jointDef;
     MouseJoint joint;
 
+    Boolean frictionSentLastRound = false;
+
     public GameScreen(Main main){
         this.main = main;
     }
@@ -260,10 +262,13 @@ public class GameScreen extends InputAdapter implements Screen {
 
         joint.setTarget(getJointTarget(screenX, screenY));
 
-        if (screenX % 2 == 0)
+        //if (screenX % 2 == 0)
+        if(!frictionSentLastRound)
             main.mtpad.sendFriction(getResistance());
         else
             main.mtpad.turnOff();
+
+        frictionSentLastRound = !frictionSentLastRound;
 
         return true;
     }
