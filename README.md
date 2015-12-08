@@ -8,4 +8,6 @@ The app will allow users to simulate complex environments, compute forces acting
 
 Haptic feedback is employed to simulate forces in order to give a realistic field of experimentation, as compared to conventional tools.
 
+[Video](https://www.youtube.com/embed/ZHrmDj8fppA) demonstrating the application.
+
 This video is part of the Student Innovation Challenge for World Haptics 2015. More information on the challenge at [Haptics 2015](http://haptics2015.org/program/student-innovation-challenge.html) More information about the TPad Phone at [www.thetpadphone.com](www.thetpadphone.com).
